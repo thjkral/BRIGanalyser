@@ -6,16 +6,12 @@
  * Commissioned by:
  * University Medical Center Groningen | Medical Microbiology
  */
-package mmb.tomkral.briganalyser.main;
+package mmb.thjkral.briganalyzer.model;
 
 /**
  *
  * @author KralTHJ
  */
-public class BRIGanalyser {
-    
-    public static void main(String[] args) {
-        
-    }
+public class ExecuteBLAST {
     
 }
