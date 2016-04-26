@@ -6,12 +6,12 @@
  * Commissioned by:
  * University Medical Center Groningen | Medical Microbiology
  */
-package mmb.thjkral.briganalyzer.model;
+package mmb.thjkral.briganalyser.model;
 
 /**
  *
  * @author KralTHJ
  */
-public class GenerateRings {
+public class Primer {
     
 }
