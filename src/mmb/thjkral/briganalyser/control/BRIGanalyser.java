@@ -9,11 +9,8 @@
 package mmb.thjkral.briganalyser.control;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import mmb.thjkral.briganalyser.model.*;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  * Main class.

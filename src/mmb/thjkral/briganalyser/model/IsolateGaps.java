@@ -83,6 +83,11 @@ public class IsolateGaps {
 
     }//generateRings()
 
+    /**
+     * Isolates gaps based on the Rings.
+     * @param ringList
+     * @return ArrayList<Gap> gapList
+     */
     private ArrayList makeGaps(ArrayList<Ring> ringList) {
         
         ArrayList<Gap> gapList = new ArrayList();        
@@ -114,21 +119,9 @@ public class IsolateGaps {
                     gapList.add(g);
                 }
             }            
-        }
-        
-        
-        
+        } 
         
         return gapList;
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
     }//makeGaps()
@@ -137,4 +130,4 @@ public class IsolateGaps {
     
     
     
-}
+}//class
