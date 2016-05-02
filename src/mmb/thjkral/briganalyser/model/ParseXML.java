@@ -18,15 +18,16 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
- *
+ * Execute operations on XML files.
+ * Utilises the Java Document Object Model.
  * @author KralTHJ
  */
 public class ParseXML {
 
     /**
-     *
+     * Makes a Document object of the input XML file.
      * @param filePath
-     * @return
+     * @return Document doc
      */
     public Document makeDocument(String filePath) {
         

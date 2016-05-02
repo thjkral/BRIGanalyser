@@ -8,12 +8,10 @@
  */
 package mmb.thjkral.briganalyser.control;
 
-//import mmb.thjkral.briganalyser.view.*;
 import java.util.ArrayList;
 import mmb.thjkral.briganalyser.model.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -49,45 +47,55 @@ public class BRIGanalyser {
         ParseXML parser = new ParseXML();
         Document doc = parser.makeDocument(filePath);
         
-        if (doc != null) {            
-            generateRings(doc);
-        } else {
-            throw new NullPointerException();
-        }
+        //generate rings from the doc
+        ArrayList<Ring> ringList = generateRings(doc);
         
     }
 
-    private void generateRings(Document doc) {
+    /**
+     * Makes Ring objects from the input XML.
+     * @param doc
+     * @return ArrayList<Ring>
+     */
+    private ArrayList<Ring> generateRings(Document doc) {
         
+        //Dcocument to Element
         Element el = doc.getDocumentElement();
         
+        //All featureSlot elements (rings) in list
         NodeList nList = el.getElementsByTagName("featureSlot");
-        System.out.println("Length: " + nList.getLength());
+        System.out.println("Number of rings: " + nList.getLength());
 
+        //get the total length of the reference genome
         int totalLength = Integer.parseInt(el.getAttribute("sequenceLength"));
-        System.out.println("Total length: " + totalLength);
+        System.out.println("Total length reference: " + totalLength);
 
+        //ArrayList for holding Ring objects
         ArrayList<Ring> ringArray = new ArrayList();
-
+        
         for (int i = 0; i < nList.getLength(); i++) {
             Element ringTag = (Element) nList.item(i);
-
+            //fetch all featureRange nodes
+            NodeList startStopCor = ringTag.getElementsByTagName("featureRange");
+            
+            //make ArrayLists for coordinates
+            ArrayList startCor = new ArrayList();
+            ArrayList stopCor = new ArrayList();
+            
+            for (int j = 0; j < startStopCor.getLength(); j++) {//traverse all featureRange nodes
+                Element features = (Element) startStopCor.item(j);
+                //get startposotion
+                startCor.add(features.getAttribute("start"));
+                //get stoppositions
+                stopCor.add(features.getAttribute("stop"));
+            }
+            
+            //create Ring objects
+            Ring r = new Ring(Integer.toString(i), startCor, stopCor);
+            ringArray.add(r);            
         }
-
-
-//        for (int i = 0; i < nList.getLength(); i++) {
-//
-//            NodeList fList = nList.item(i).getChildNodes();
-//            System.out.println(nList.item(i).getNodeName()
-//                + " No. "
-//                + i
-//                + " has "
-//                + fList.getLength()
-//                + " childnodes. First is called: "
-//                + fList.item(0).getNodeName());
-//
-//        }
-
+        
+        return ringArray;
 
     }
     

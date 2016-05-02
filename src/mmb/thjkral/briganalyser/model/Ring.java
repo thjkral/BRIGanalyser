@@ -16,24 +16,43 @@ import java.util.ArrayList;
  */
 public class Ring {
     
-    private int number;    
+    private String name;    
     private ArrayList startPositions;
     private ArrayList stopPositions;
     private ArrayList gapsArray;
 
-    public Ring(int number, ArrayList gapsArray) {
-        this.number = number;
-        this.gapsArray = gapsArray;
+    public Ring(String name, ArrayList startPositions, ArrayList stopPositions) {
+        this.name = name;
+        this.startPositions = startPositions;
+        this.stopPositions = stopPositions;
     }
 
-    public int getNumber() {
-        return number;
+    
+    public String getName() {
+        return name;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setName(String name) {
+        this.name = name;
     }
 
+    public ArrayList getStartPositions() {
+        return startPositions;
+    }
+
+    public void setStartPositions(ArrayList startPositions) {
+        this.startPositions = startPositions;
+    }
+
+    public ArrayList getStopPositions() {
+        return stopPositions;
+    }
+
+    public void setStopPositions(ArrayList stopPositions) {
+        this.stopPositions = stopPositions;
+    }
+    
+    
     public ArrayList getGapsArray() {
         return gapsArray;
     }
