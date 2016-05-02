@@ -23,31 +23,74 @@ import org.w3c.dom.NodeList;
  */
 public class BRIGanalyser {
     
+    /**
+     * Main mathod.
+     * From here, all logic will be started.
+     * @param args
+     */
     public static void main(String[] args) {
         
         BRIGanalyser ba = new BRIGanalyser();
         
-        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\ProefdataBRIG\\exampleData\\output_10\\scratch\\BRIGExample.fna.xml";
+        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\exampleData\\output_12\\scratch\\BRIGExample.fna.xml";
         ba.start(filePath);
     }
 
     private void start(String filePath) {
         
+        /*
+        1. Parse XML, make Document object
+        2. Make Ring objects
+        3. Make Gap objects
+        4. Identify Unique Markers
+        */
+        
+        //make Document object
         ParseXML parser = new ParseXML();
         Document doc = parser.makeDocument(filePath);
         
-        //GenerateRings gr = new GenerateRings();
-        
-        
-        if (doc != null) {
-            NodeList nList = doc.getElementsByTagName("feature");
-            System.out.println("Length: " + nList.getLength());
-            
+        if (doc != null) {            
+            generateRings(doc);
         } else {
-            System.out.println("Problems!");
+            throw new NullPointerException();
         }
         
+    }
+
+    private void generateRings(Document doc) {
+        
+        Element el = doc.getDocumentElement();
+        
+        NodeList nList = el.getElementsByTagName("featureSlot");
+        System.out.println("Length: " + nList.getLength());
+
+        int totalLength = Integer.parseInt(el.getAttribute("sequenceLength"));
+        System.out.println("Total length: " + totalLength);
+
+        ArrayList<Ring> ringArray = new ArrayList();
+
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element ringTag = (Element) nList.item(i);
+
+        }
+
+
+//        for (int i = 0; i < nList.getLength(); i++) {
+//
+//            NodeList fList = nList.item(i).getChildNodes();
+//            System.out.println(nList.item(i).getNodeName()
+//                + " No. "
+//                + i
+//                + " has "
+//                + fList.getLength()
+//                + " childnodes. First is called: "
+//                + fList.item(0).getNodeName());
+//
+//        }
+
+
     }
     
     
 }
+
