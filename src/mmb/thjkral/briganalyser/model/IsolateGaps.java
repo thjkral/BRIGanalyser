@@ -20,15 +20,16 @@ import org.w3c.dom.NodeList;
  */
 public class IsolateGaps {
     
-    public ArrayList<Gap> isolate (Document doc) {
+    public ArrayList<Ring> isolate (Document doc) {
         
         //generateRings
-        ArrayList<Ring> ringList = generateRings(doc);
+        ArrayList<Ring> ringList = makeRings(doc);
         
-        //get gaps
-        ArrayList<Gap> gapList = makeGaps(ringList);
-        return gapList;
+        //add list of gaps to each Ring
+        makeGaps(ringList);
         
+        //return ArrayList
+        return ringList;
     }
     
     
@@ -37,18 +38,15 @@ public class IsolateGaps {
      * @param doc
      * @return ArrayList<Ring>
      */
-    private ArrayList<Ring> generateRings(Document doc) {
+    private ArrayList<Ring> makeRings(Document doc) {
         
         //Dcocument to Element
         Element el = doc.getDocumentElement();
         
         //All featureSlot elements (rings) in list
         NodeList nList = el.getElementsByTagName("featureSlot");
-        System.out.println("Number of rings: " + nList.getLength());
+//        System.out.println("Number of rings: " + nList.getLength());
 
-        //get the total length of the reference genome
-        int totalLength = Integer.parseInt(el.getAttribute("sequenceLength"));
-        System.out.println("Total length reference: " + totalLength);
 
         //ArrayList for holding Ring objects
         ArrayList<Ring> ringArray = new ArrayList();
@@ -88,19 +86,18 @@ public class IsolateGaps {
      * @param ringList
      * @return ArrayList<Gap> gapList
      */
-    private ArrayList makeGaps(ArrayList<Ring> ringList) {
+    private void makeGaps(ArrayList<Ring> ringList) {
         
-        ArrayList<Gap> gapList = new ArrayList();        
+                
         
         for (Ring ring : ringList) {//iterate list with Rings
-                        
-            ArrayList start = ring.startPositions;
-            ArrayList stop = ring.stopPositions;
             
-            System.out.println("Starts: "
-                + start.size()
-                + " | Stops: "
-                + stop.size());
+            ArrayList<Gap> gapList = new ArrayList();
+            
+//            System.out.println("Starts: "
+//                + start.size()
+//                + " | Stops: "
+//                + stop.size());
             
             for (int i = 0; i < ring.startPositions.size(); i++) {
                 
@@ -112,16 +109,16 @@ public class IsolateGaps {
                     gapList.add(g);
                 }
                 else if (i == ring.startPositions.size()) {//at last iteration
-                    Gap g = new Gap(newStart, newStart);
+                    Gap g = new Gap(newStart, ring.startPositions.size());
                 }
                 else {//rest of the iterations
                     Gap g = new Gap(newStart, i);
                     gapList.add(g);
                 }
-            }            
+            }
+            ring.setGapsArray(gapList);
         } 
         
-        return gapList;
         
         
     }//makeGaps()

@@ -47,10 +47,11 @@ public class BRIGanalyser {
         
         //isolate gaps from the doc
         IsolateGaps iso = new IsolateGaps();
-        ArrayList<Gap> gapList = iso.isolate(doc);
+        ArrayList<Ring> ringList = iso.isolate(doc);
         
-        
-        
+        for (Ring r : ringList) {
+            System.out.println(r.getGapsArray().size());
+        }
     }
 
     

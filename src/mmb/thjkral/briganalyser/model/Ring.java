@@ -43,6 +43,11 @@ public class Ring {
     public void setGapsArray(ArrayList gapsArray) {
         this.gapsArray = gapsArray;
     }
+
+    @Override
+    public String toString() {
+        return "Ring{" + "name=" + name + ", gapsArray=" + gapsArray + ", startPositions=" + startPositions + ", stopPositions=" + stopPositions + '}';
+    }
     
     
     

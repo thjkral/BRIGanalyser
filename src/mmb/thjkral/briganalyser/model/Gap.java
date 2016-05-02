@@ -37,6 +37,11 @@ public class Gap {
     public void setStopCor(int stopCor) {
         this.stopCor = stopCor;
     }
+
+    @Override
+    public String toString() {
+        return "Gap{" + "startCor=" + startCor + ", stopCor=" + stopCor + '}';
+    }
     
     
     
