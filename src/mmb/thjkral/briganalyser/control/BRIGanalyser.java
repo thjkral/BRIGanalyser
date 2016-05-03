@@ -30,7 +30,7 @@ public class BRIGanalyser {
         
         String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\exampleData\\output_12\\scratch\\BRIGExample.fna.xml";
         ba.start(filePath);
-    }
+    }//main()
 
     private void start(String filePath) {
         
@@ -49,10 +49,18 @@ public class BRIGanalyser {
         IsolateGaps iso = new IsolateGaps();
         ArrayList<Ring> ringList = iso.isolate(doc);
         
+        System.out.println("Number of gaps (not unique):");
         for (Ring r : ringList) {
-            System.out.println(r.getGapsArray().size());
+            System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
         }
-    }
+        
+        FindUniqueMarkers fum = new FindUniqueMarkers();
+        
+        
+        
+        
+        
+    }//start()
 
     
     

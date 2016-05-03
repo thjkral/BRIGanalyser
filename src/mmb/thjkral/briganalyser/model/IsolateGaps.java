@@ -20,6 +20,11 @@ import org.w3c.dom.NodeList;
  */
 public class IsolateGaps {
     
+    /**
+     *
+     * @param doc
+     * @return
+     */
     public ArrayList<Ring> isolate (Document doc) {
         
         //generateRings
@@ -71,7 +76,6 @@ public class IsolateGaps {
             //sort coordinates
             Collections.sort(startCor);
             Collections.sort(stopCor);
-            
             //create Ring objects
             Ring r = new Ring(Integer.toString(i), startCor, stopCor);
             ringArray.add(r);
@@ -100,19 +104,17 @@ public class IsolateGaps {
 //                + stop.size());
             
             for (int i = 0; i < ring.startPositions.size(); i++) {
-                
-                //make a new start position from previous stop position
-                int newStart = (int) ring.stopPositions.get(i) - 1;
-                
+                                
                 if (i == 0) {//at first iteration
-                    Gap g = new Gap(0, i);
+                    Gap g = new Gap(ring.getName(), 0, (int) ring.startPositions.get(i));
                     gapList.add(g);
                 }
                 else if (i == ring.startPositions.size()) {//at last iteration
-                    Gap g = new Gap(newStart, ring.startPositions.size());
+                    Gap g = new Gap(ring.getName(), (int) ring.stopPositions.get(i), ring.startPositions.size());
+                    gapList.add(g);
                 }
                 else {//rest of the iterations
-                    Gap g = new Gap(newStart, i);
+                    Gap g = new Gap(ring.getName(), (int) ring.stopPositions.get(i - 1), (int) ring.startPositions.get(i));
                     gapList.add(g);
                 }
             }

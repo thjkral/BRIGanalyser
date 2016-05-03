@@ -14,14 +14,17 @@ package mmb.thjkral.briganalyser.model;
  */
 public class Gap {
     
+    String ringName;
     private int startCor;
     private int stopCor;
 
-    public Gap(int startCor, int stopCor) {
+    public Gap(String ringName, int startCor, int stopCor) {
+        this.ringName = ringName;
         this.startCor = startCor;
         this.stopCor = stopCor;
     }
 
+    
     public int getStartCor() {
         return startCor;
     }
@@ -40,9 +43,10 @@ public class Gap {
 
     @Override
     public String toString() {
-        return "Gap{" + "startCor=" + startCor + ", stopCor=" + stopCor + '}';
+        return "Gap{" + "ringName=" + ringName + ", startCor=" + startCor + ", stopCor=" + stopCor + '}';
     }
-    
+
+      
     
     
 }
