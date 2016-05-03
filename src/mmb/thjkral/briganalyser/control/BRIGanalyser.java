@@ -55,7 +55,7 @@ public class BRIGanalyser {
         }
         
         FindUniqueMarkers fum = new FindUniqueMarkers();
-        
+        fum.start(ringList);
         
         
         
