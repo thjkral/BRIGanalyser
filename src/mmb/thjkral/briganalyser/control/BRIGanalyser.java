@@ -32,6 +32,10 @@ public class BRIGanalyser {
         ba.start(filePath);
     }//main()
 
+    /**
+     * -
+     * @param filePath 
+     */
     private void start(String filePath) {
         
         /*
@@ -49,19 +53,21 @@ public class BRIGanalyser {
         IsolateGaps iso = new IsolateGaps();
         ArrayList<Ring> ringList = iso.isolate(doc);
         
-        System.out.println("Number of gaps (not unique):");
-        for (Ring r : ringList) {
-            System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
-        }
+//        System.out.println("Number of gaps (not unique):");
+//        for (Ring r : ringList) {
+//            System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
+//        }
         
         //find the unique markers
-        FindUniqueMarkers fum = new FindUniqueMarkers();
-        ArrayList<UniqueMarker> umList = fum.start(ringList);
+//        FindUniqueMarkers fum = new FindUniqueMarkers();
+//        ArrayList<UniqueMarker> umList = fum.start(ringList);
         
-        for (UniqueMarker um : umList) {
-            //System.out.println(um);
-        }
+//        for (UniqueMarker um : umList) {
+//            System.out.println(um);
+//        }
         
+        //String test = parser.getReferenceSequence("", 10, 15);
+        //System.out.println(test);
         
     }//start()
 

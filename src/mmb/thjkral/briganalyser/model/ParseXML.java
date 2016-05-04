@@ -9,8 +9,15 @@
 package mmb.thjkral.briganalyser.model;
 
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -58,7 +65,62 @@ public class ParseXML {
             return null;
         }
         
-    }
+    }//makeDocument()
+    
+    /**
+     *
+     * @param fileLocation
+     * @param start
+     * @param stop
+     * @return
+     */
+    public String getReferenceSequence(String fileLocation, int start, int stop) {
+        
+        fileLocation = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Programs\\BRIG\\BRIG_examples\\Chapter5_6_8_wholeGenomeExamples\\BRIGExample.fna";
+        String subSequence = "";
+        
+        Path path = Paths.get(fileLocation);
+        
+        try (BufferedReader br = Files.newBufferedReader(path, Charset.defaultCharset())){
+            
+            String line = "";
+            int passedLetters = 0;
+            
+            String regex = "[ATCGatcg]";
+            Pattern p = Pattern.compile(regex);
+            Matcher m = p.matcher(line);
+            
+            while ((line = br.readLine()) != null) {
+                
+                for (int i = 0; i < line.length(); i++) {                    
+                    if (line.charAt(i) == '$') {
+                        passedLetters++;
+                        
+                        if (passedLetters >= start || passedLetters <= stop) {
+                            System.out.println("Found one!");
+                            subSequence = subSequence.concat(Character.toString(line.charAt(i)));
+                        }
+                    }
+                    
+//                    String currLetter = Character.toString(line.charAt(i));
+//                    if (line.charAt(i) >= start && line.charAt(i) <= stop) {
+//                        subSequence = subSequence.concat(i);
+//                    }
+                }
+                
+                //referenceGenome = subSequence.concat(line);
+            }
+            br.close();
+            
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        subSequence = subSequence.replaceAll("\\s+","");
+        System.out.println(subSequence);
+        
+        return subSequence;
+    }//getReferenceSequence()
     
     
-}
+}//class()

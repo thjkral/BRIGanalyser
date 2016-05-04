@@ -22,7 +22,6 @@ public class FindUniqueMarkers {
     */
     int totalLength = 5357923;
     int numRings = 6;
-    String sequence = "ATAACACAGCTCTCGACACACAGCTCG";
     
     /**
      *
@@ -72,7 +71,6 @@ public class FindUniqueMarkers {
             
         }
         
-        System.out.println("\nNumber of overlappers: " + overlappingGaps.size() + "\n");
         return overlappingGaps;
         
     }//compare()
@@ -83,6 +81,9 @@ public class FindUniqueMarkers {
         //this determines the position of the unique marker on the reference
         
         ArrayList<UniqueMarker> umList = new ArrayList<>();
+        
+        ParseXML parser = new ParseXML();
+        String refSequence = parser.getReferenceSequence("null", 20, 80);
         
         for (int i = 0; i < overlappingGaps.size(); i++) {//for every array
             
@@ -106,13 +107,13 @@ public class FindUniqueMarkers {
             
             
             int difference = stopLowest - startHighest;
-            if (difference >= 18 && difference <= 25) {
-                UniqueMarker um = new UniqueMarker(i, startHighest, stopLowest, sequence.length(),sequence);
+            if (difference >= 38 && difference <= 45) {
+                String markerSequence = refSequence.substring(startHighest, stopLowest);
+                UniqueMarker um = new UniqueMarker(i, startHighest, stopLowest, difference, "N/A");
                 umList.add(um);
             }
         }
         
-        System.out.println("Number of valid overlaps: " + umList.size());
         return umList;
         
     }//isolateUniqueMarkers()

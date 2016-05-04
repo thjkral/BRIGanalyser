@@ -76,7 +76,4 @@ public class UniqueMarker {
         return "UniqueMarker{" + "number=" + number + ", startPosition=" + startPosition + ", stopPosition=" + stopPosition + ", length=" + length + ", sequence=" + sequence + '}';
     }
 
-    
-    
-    
 }
