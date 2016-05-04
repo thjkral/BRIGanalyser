@@ -17,17 +17,28 @@ import java.util.ArrayList;
  */
 public class FindUniqueMarkers {
     
+    /*
+    GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
+    */
+    int totalLength = 5357923;
+    int numRings = 6;
+    String sequence = "ATAACACAGCTCTCGACACACAGCTCG";
+    
     /**
      *
      * @param ringList
+     * @return 
      */
-    public void start(ArrayList<Ring> ringList) {
+    public ArrayList<UniqueMarker> start(ArrayList<Ring> ringList) {
         
-        compare(ringList);
+        ArrayList<ArrayList<Gap>> overlapList = compare(ringList);
+        ArrayList<UniqueMarker> umList = isolateUniqueMarkers(overlapList);
+        
+        return(umList);
         
     }//start()
 
-    private void compare(ArrayList<Ring> ringList) {
+    private ArrayList<ArrayList<Gap>> compare(ArrayList<Ring> ringList) {
         
         ArrayList<ArrayList<Gap>> overlappingGaps = new ArrayList<>();
         
@@ -41,7 +52,7 @@ public class FindUniqueMarkers {
             ArrayList<Gap> matches = new ArrayList<>();
             matches.add(gapOne);
             
-            for (int j = 0; j < ringList.size(); j++) {//for every other Ring
+            for (int j = 1; j < ringList.size(); j++) {//for every other Ring
                 
                 for (int k = 0; k < ringList.get(j).getGapsArray().size(); k++) {//for every Gap of that Ring
                     
@@ -51,40 +62,58 @@ public class FindUniqueMarkers {
                     
                     if (start >= startTwo && stop <= stopTwo) {
                         matches.add(gapTwo);
-                    } else {
-                        continue;
                     }
-                    
                     
                 }
             }
-            overlappingGaps.add(matches);
+            if (matches.size() == numRings) {//if all rings share overlap
+                overlappingGaps.add(matches);
+            }
+            
         }
         
-        
-        //isolate UMs
-        System.out.println("Number of overlappers: " + overlappingGaps.size());
-        overlappingGaps = isolateUniqueMarkers(overlappingGaps);
-        System.out.println("Number of valid overlappers: " + overlappingGaps.size());
-        System.out.println(overlappingGaps.get(0));
-        
-        
+        System.out.println("\nNumber of overlappers: " + overlappingGaps.size() + "\n");
+        return overlappingGaps;
         
     }//compare()
     
-    private ArrayList<ArrayList<Gap>> isolateUniqueMarkers (ArrayList<ArrayList<Gap>> overlappingGaps) {
+    private ArrayList<UniqueMarker> isolateUniqueMarkers (ArrayList<ArrayList<Gap>> overlappingGaps) {
         
-        //is the length of each array the same as the number of rings?
-        //delete all who have length < number of rings
+        //get the higherst startposition and lowest stopposition
+        //this determines the position of the unique marker on the reference
         
-        for (int i = 0; i < overlappingGaps.size(); i++) {
-            ArrayList currList = (ArrayList) overlappingGaps.get(i);
-            if (currList.size() < 6) {
-                overlappingGaps.remove(i);
+        ArrayList<UniqueMarker> umList = new ArrayList<>();
+        
+        for (int i = 0; i < overlappingGaps.size(); i++) {//for every array
+            
+            //set highest startposition to first Gap in ArrayList
+            int startHighest = overlappingGaps.get(i).get(0).getStartCor();
+            //set lowest stopposition to first Gap in ArrayList
+            int stopLowest = overlappingGaps.get(i).get(0).getStopCor();
+            
+            for (int j = 0; j < overlappingGaps.get(i).size(); j++) {//for every gap in array
+                                
+                int startCurr = overlappingGaps.get(i).get(j).getStartCor();
+                int stopCurr = overlappingGaps.get(i).get(j).getStopCor();
+                
+                if (startCurr >= startHighest) {
+                    startHighest = startCurr;
+                }
+                if (stopCurr <= stopLowest) {
+                    stopLowest = stopCurr;
+                }
+            }
+            
+            
+            int difference = stopLowest - startHighest;
+            if (difference >= 18 && difference <= 25) {
+                UniqueMarker um = new UniqueMarker(i, startHighest, stopLowest, sequence.length(),sequence);
+                umList.add(um);
             }
         }
         
-        return overlappingGaps;
+        System.out.println("Number of valid overlaps: " + umList.size());
+        return umList;
         
     }//isolateUniqueMarkers()
     

@@ -54,10 +54,13 @@ public class BRIGanalyser {
             System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
         }
         
+        //find the unique markers
         FindUniqueMarkers fum = new FindUniqueMarkers();
-        fum.start(ringList);
+        ArrayList<UniqueMarker> umList = fum.start(ringList);
         
-        
+        for (UniqueMarker um : umList) {
+            //System.out.println(um);
+        }
         
         
     }//start()
