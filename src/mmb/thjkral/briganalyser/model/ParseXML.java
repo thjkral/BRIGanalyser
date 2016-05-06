@@ -114,7 +114,7 @@ public class ParseXML {
                     else if (start <= passedLetters && stop > passedLetters) {
                         referenceGenomeSub = line.substring(start);
                     }
-                    else if (passedLetters > stop && referenceGenomeSub != "") {
+                    else if (passedLetters > stop && !referenceGenomeSub.isEmpty()) {
                         referenceGenomeSub = referenceGenomeSub.concat(line.substring(0, stop));
                     }
                     
