@@ -16,6 +16,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import javax.xml.parsers.DocumentBuilder;
@@ -76,39 +77,49 @@ public class ParseXML {
      */
     public String getReferenceSequence(String fileLocation, int start, int stop) {
         
+        /*
+        What I want:
+        >Genome
+        acagaattgaTCTGAcggttttctctgacagcatacaatcaagtctaacagtccgccttg
+        */
+        
         fileLocation = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Programs\\BRIG\\BRIG_examples\\Chapter5_6_8_wholeGenomeExamples\\BRIGExample.fna";
-        String subSequence = "";
+        String referenceGenomeSub = "";
+        int passedLetters = 0;
+        
+        //edit to indices
+        start = start - 1;
+        stop = stop - 1;
         
         Path path = Paths.get(fileLocation);
         
+        
+        
         try (BufferedReader br = Files.newBufferedReader(path, Charset.defaultCharset())){
             
-            String line = "";
-            int passedLetters = 0;
-            
-            String regex = "[ATCGatcg]";
-            Pattern p = Pattern.compile(regex);
-            Matcher m = p.matcher(line);
+            String line;
             
             while ((line = br.readLine()) != null) {
                 
-                for (int i = 0; i < line.length(); i++) {                    
-                    if (line.charAt(i) == '$') {
-                        passedLetters++;
-                        
-                        if (passedLetters >= start || passedLetters <= stop) {
-                            System.out.println("Found one!");
-                            subSequence = subSequence.concat(Character.toString(line.charAt(i)));
-                        }
+                if (!line.startsWith(">")) {//if line doesn't start with description
+                    passedLetters = passedLetters + line.length();
+                    
+                    
+                    //subsequence is on one line
+                    if (start < passedLetters && stop <= passedLetters) {                        
+                        referenceGenomeSub = line.substring(start, stop);                        
                     }
                     
-//                    String currLetter = Character.toString(line.charAt(i));
-//                    if (line.charAt(i) >= start && line.charAt(i) <= stop) {
-//                        subSequence = subSequence.concat(i);
-//                    }
+                    //subsequence is on multiple lines
+                    else if (start <= passedLetters && stop > passedLetters) {
+                        referenceGenomeSub = line.substring(start);
+                    }
+                    else if (passedLetters > stop && referenceGenomeSub != "") {
+                        referenceGenomeSub = referenceGenomeSub.concat(line.substring(0, stop));
+                    }
+                    
                 }
                 
-                //referenceGenome = subSequence.concat(line);
             }
             br.close();
             
@@ -116,10 +127,11 @@ public class ParseXML {
             System.out.println("Error: " + e.getMessage());
         }
         
-        subSequence = subSequence.replaceAll("\\s+","");
-        System.out.println(subSequence);
+        referenceGenomeSub = referenceGenomeSub.replaceAll("\\s+","");
+        System.out.println("referenceGenomeSub= " + referenceGenomeSub);
         
-        return subSequence;
+        return referenceGenomeSub;
+        
     }//getReferenceSequence()
     
     

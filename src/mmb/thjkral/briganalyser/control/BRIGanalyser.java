@@ -66,8 +66,8 @@ public class BRIGanalyser {
 //            System.out.println(um);
 //        }
         
-        //String test = parser.getReferenceSequence("", 10, 15);
-        //System.out.println(test);
+        String test = parser.getReferenceSequence("", 10, 15);
+//        System.out.println(test);
         
     }//start()
 
