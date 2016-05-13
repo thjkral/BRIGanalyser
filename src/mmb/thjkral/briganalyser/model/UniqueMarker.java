@@ -18,17 +18,18 @@ public class UniqueMarker {
     private int startPosition;
     private int stopPosition;
     private int length;
-    private String sequence;
+    private String sequenceForward;
+    private String sequenceReverse;
 
-    public UniqueMarker(int number, int startPosition, int stopPosition, int length, String sequence) {
+    public UniqueMarker(int number, int startPosition, int stopPosition, int length, String sequenceForward, String sequenceReverse) {
         this.number = number;
         this.startPosition = startPosition;
         this.stopPosition = stopPosition;
         this.length = length;
-        this.sequence = sequence;
+        this.sequenceForward = sequenceForward;
+        this.sequenceReverse = sequenceReverse;
     }
 
-    
 
     public int getNumber() {
         return number;
@@ -61,19 +62,29 @@ public class UniqueMarker {
     public void setLength(int length) {
         this.length = length;
     }
-    
 
-    public String getSequence() {
-        return sequence;
+    public String getSequenceForward() {
+        return sequenceForward;
     }
 
-    public void setSequence(String sequence) {
-        this.sequence = sequence;
+    public void setSequenceForward(String sequenceForward) {
+        this.sequenceForward = sequenceForward;
+    }
+
+    public String getSequenceReverse() {
+        return sequenceReverse;
+    }
+
+    public void setSequenceReverse(String sequenceReverse) {
+        this.sequenceReverse = sequenceReverse;
     }
 
     @Override
     public String toString() {
-        return "UniqueMarker{" + "number=" + number + ", startPosition=" + startPosition + ", stopPosition=" + stopPosition + ", length=" + length + ", sequence=" + sequence + '}';
+        return "UniqueMarker{" + "number=" + number + ", startPosition=" + startPosition + ", stopPosition=" + stopPosition + ", length=" + length + ", sequenceForward=" + sequenceForward + ", sequenceReverse=" + sequenceReverse + '}';
     }
+    
+    
+    
 
 }

@@ -83,7 +83,7 @@ public class FindUniqueMarkers {
         ArrayList<UniqueMarker> umList = new ArrayList<>();
         
         ParseXML parser = new ParseXML();
-        String refSequence = parser.getReferenceSequence("null", 20, 80);
+        String refSequence = parser.getReferenceSequence("null", 20, 50);
         
         for (int i = 0; i < overlappingGaps.size(); i++) {//for every array
             
@@ -93,7 +93,7 @@ public class FindUniqueMarkers {
             int stopLowest = overlappingGaps.get(i).get(0).getStopCor();
             
             for (int j = 0; j < overlappingGaps.get(i).size(); j++) {//for every gap in array
-                                
+                
                 int startCurr = overlappingGaps.get(i).get(j).getStartCor();
                 int stopCurr = overlappingGaps.get(i).get(j).getStopCor();
                 
@@ -109,7 +109,12 @@ public class FindUniqueMarkers {
             int difference = stopLowest - startHighest;
             if (difference >= 38 && difference <= 45) {
                 String markerSequence = refSequence.substring(startHighest, stopLowest);
-                UniqueMarker um = new UniqueMarker(i, startHighest, stopLowest, difference, "N/A");
+                UniqueMarker um = new UniqueMarker(i, 
+                        startHighest, 
+                        stopLowest, 
+                        difference, 
+                        "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC",
+                        "GCGCGAATCTCAGCGCGCTTTTCGCGCGCAAACACGCTCGCGCGACGTGCTCTCTAGCGGGCGCGCGCTTGTCTATATCTGTAT");
                 umList.add(um);
             }
         }
@@ -117,5 +122,10 @@ public class FindUniqueMarkers {
         return umList;
         
     }//isolateUniqueMarkers()
+    
+    private String makeComplementary (String sequence) {
+        
+        return null;
+    }
     
 }//class()

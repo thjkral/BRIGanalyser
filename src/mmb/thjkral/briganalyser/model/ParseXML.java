@@ -16,9 +16,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -86,6 +83,7 @@ public class ParseXML {
         fileLocation = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Programs\\BRIG\\BRIG_examples\\Chapter5_6_8_wholeGenomeExamples\\BRIGExample.fna";
         String referenceGenomeSub = "";
         int passedLetters = 0;
+        int passedLines = 0;
         
         //edit to indices
         start = start - 1;
@@ -103,6 +101,11 @@ public class ParseXML {
                 
                 if (!line.startsWith(">")) {//if line doesn't start with description
                     passedLetters = passedLetters + line.length();
+                    
+                    if (passedLines != 1) {
+                        start = start - passedLetters;
+                        stop = stop - passedLetters;
+                    }
                     
                     
                     //subsequence is on one line

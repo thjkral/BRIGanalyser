@@ -53,21 +53,20 @@ public class BRIGanalyser {
         IsolateGaps iso = new IsolateGaps();
         ArrayList<Ring> ringList = iso.isolate(doc);
         
-//        System.out.println("Number of gaps (not unique):");
-//        for (Ring r : ringList) {
-//            System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
-//        }
+        System.out.println("Number of gaps (not unique):");
+        for (Ring r : ringList) {
+            System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
+        }
         
         //find the unique markers
-//        FindUniqueMarkers fum = new FindUniqueMarkers();
-//        ArrayList<UniqueMarker> umList = fum.start(ringList);
+        FindUniqueMarkers fum = new FindUniqueMarkers();
+        ArrayList<UniqueMarker> umList = fum.start(ringList);
+        System.out.println("Found " + umList.size() + " unique markers in total");
         
-//        for (UniqueMarker um : umList) {
-//            System.out.println(um);
-//        }
+       //isolate primers
+//       GeneratePrimers gp = new GeneratePrimers();
+//       gp.generate(umList);
         
-        String test = parser.getReferenceSequence("", 10, 15);
-//        System.out.println(test);
         
     }//start()
 
