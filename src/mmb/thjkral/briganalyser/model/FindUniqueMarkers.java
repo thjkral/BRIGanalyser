@@ -83,7 +83,7 @@ public class FindUniqueMarkers {
         ArrayList<UniqueMarker> umList = new ArrayList<>();
         
         ParseXML parser = new ParseXML();
-        String refSequence = parser.getReferenceSequence("null", 20, 50);
+        //String refSequence = parser.getReferenceSequence("null", 20, 50);
         
         for (int i = 0; i < overlappingGaps.size(); i++) {//for every array
             
@@ -108,13 +108,14 @@ public class FindUniqueMarkers {
             
             int difference = stopLowest - startHighest;
             if (difference >= 38 && difference <= 45) {
-                String markerSequence = refSequence.substring(startHighest, stopLowest);
+                //String markerSequence = refSequence.substring(startHighest, stopLowest);
+                String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
                 UniqueMarker um = new UniqueMarker(i, 
                         startHighest, 
                         stopLowest, 
                         difference, 
-                        "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC",
-                        "GCGCGAATCTCAGCGCGCTTTTCGCGCGCAAACACGCTCGCGCGACGTGCTCTCTAGCGGGCGCGCGCTTGTCTATATCTGTAT");
+                        tempSequence,
+                        makeComplementary(tempSequence));
                 umList.add(um);
             }
         }
@@ -123,9 +124,37 @@ public class FindUniqueMarkers {
         
     }//isolateUniqueMarkers()
     
+    
+    
+    /**
+     * Returns the complement of a given DNA sequence.
+     * @param sequence
+     * @return complementary sequence
+     */
     private String makeComplementary (String sequence) {
         
-        return null;
+        String seqComp = new StringBuilder(sequence).reverse().toString();
+        
+        StringBuilder complement = new StringBuilder();
+        for (int i = 0; i < seqComp.length(); i++) {
+            char c = seqComp.charAt(i);
+            
+            if (c == 'A') {
+                complement.append('T');
+            }
+            if (c == 'T') {
+                complement.append('A');
+            }
+            if (c == 'G') {
+                complement.append('C');
+            }
+            if (c == 'C') {
+                complement.append('G');
+            }
+            
+        }
+        
+        return complement.toString();
     }
     
 }//class()

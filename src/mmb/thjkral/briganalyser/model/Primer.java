@@ -17,20 +17,31 @@ import mmb.thjkral.briganalyser.enums.PrimerOrientation;
 public class Primer{
     
     int markerNumber;
+    private String sequence;
     private int length;
     private PrimerOrientation orientation;
     private double meltTemp;
     private double gcContent;
-    private boolean isUnique;
+    private boolean isUnique = false;
 
-    public Primer(int markerNumber, int length, PrimerOrientation orientation, double meltTemp, double gcContent) {
+    public Primer(int markerNumber, String sequence, int length, PrimerOrientation orientation) {
         this.markerNumber = markerNumber;
+        this.sequence = sequence;
         this.length = length;
         this.orientation = orientation;
-        this.meltTemp = meltTemp;
-        this.gcContent = gcContent;
     }
 
+    
+    public String getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(String sequence) {
+        this.sequence = sequence;
+    }
+
+    
+    
     public int getLength() {
         return length;
     }
@@ -73,10 +84,8 @@ public class Primer{
 
     @Override
     public String toString() {
-        return "Primer{" + "markerNumber=" + markerNumber + ", length=" + length + ", orientation=" + orientation + ", meltTemp=" + meltTemp + ", gcContent=" + gcContent + ", isUnique=" + isUnique + '}';
+        return "Primer{" + "markerNumber=" + markerNumber + ", sequence=" + sequence + ", length=" + length + ", orientation=" + orientation + ", meltTemp=" + meltTemp + ", gcContent=" + gcContent + ", isUnique=" + isUnique + '}';
     }
-    
-    
-    
+
     
 }

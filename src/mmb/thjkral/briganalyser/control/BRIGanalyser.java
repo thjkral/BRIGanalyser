@@ -38,34 +38,38 @@ public class BRIGanalyser {
      */
     private void start(String filePath) {
         
-        /*
-        1. Parse XML, make Document object
-        2. Make Ring objects
-        3. Make Gap objects
-        4. Identify Unique Markers
-        */
         
-        //make Document object
+        /*
+        Make Document object from XML file
+        */
         ParseXML parser = new ParseXML();
         Document doc = parser.makeDocument(filePath);
         
-        //isolate gaps from the doc
+        /*
+        Isolate gaps from the doc
+        */
         IsolateGaps iso = new IsolateGaps();
         ArrayList<Ring> ringList = iso.isolate(doc);
         
-        System.out.println("Number of gaps (not unique):");
-        for (Ring r : ringList) {
-            System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
-        }
+//        System.out.println("Number of gaps (not unique):");
+//        for (Ring r : ringList) {
+//            System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
+//        }
         
-        //find the unique markers
+        /*
+        Find the unique markers
+        */
         FindUniqueMarkers fum = new FindUniqueMarkers();
         ArrayList<UniqueMarker> umList = fum.start(ringList);
-        System.out.println("Found " + umList.size() + " unique markers in total");
+//        System.out.println("Found " + umList.size() + " unique markers in total");
         
-       //isolate primers
-//       GeneratePrimers gp = new GeneratePrimers();
-//       gp.generate(umList);
+                
+        
+       /*
+       Isolate primers
+       */
+       GeneratePrimers gp = new GeneratePrimers();
+       gp.generate(umList);
         
         
     }//start()

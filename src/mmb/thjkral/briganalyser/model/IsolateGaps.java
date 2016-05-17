@@ -27,13 +27,14 @@ public class IsolateGaps {
      */
     public ArrayList<Ring> isolate (Document doc) {
         
-        //generateRings
+        /*
+        Steps:
+        1. generateRings
+        2. add list of gaps to each Ring
+        3. return ArrayList
+        */        
         ArrayList<Ring> ringList = makeRings(doc);
-        
-        //add list of gaps to each Ring
         makeGaps(ringList);
-        
-        //return ArrayList
         return ringList;
     }
     
@@ -45,15 +46,21 @@ public class IsolateGaps {
      */
     private ArrayList<Ring> makeRings(Document doc) {
         
-        //Dcocument to Element
+        /*
+        Document to Element
+        */
         Element el = doc.getDocumentElement();
         
-        //All featureSlot elements (rings) in list
+        /*
+        All featureSlot elements (rings) in list
+        */
         NodeList nList = el.getElementsByTagName("featureSlot");
 //        System.out.println("Number of rings: " + nList.getLength());
 
 
-        //ArrayList for holding Ring objects
+        /*
+        ArrayList for holding Ring objects
+        */
         ArrayList<Ring> ringArray = new ArrayList();
         
         for (int i = 0; i < nList.getLength(); i++) {
@@ -67,16 +74,21 @@ public class IsolateGaps {
             
             for (int j = 0; j < startStopCor.getLength(); j++) {//traverse all featureRange nodes
                 Element features = (Element) startStopCor.item(j);
-                //get startposotion
+                /*
+                Get start- and stop positions
+                */
                 startCor.add(Integer.parseInt(features.getAttribute("start")));
-                //get stoppositions
                 stopCor.add(Integer.parseInt(features.getAttribute("stop")));
             }
             
-            //sort coordinates
+            /*
+            Sort coordinates
+            */
             Collections.sort(startCor);
             Collections.sort(stopCor);
-            //create Ring objects
+            /*
+            Create Ring objects and add all to ArrayList
+            */
             Ring r = new Ring(Integer.toString(i), startCor, stopCor);
             ringArray.add(r);
         }
@@ -92,16 +104,18 @@ public class IsolateGaps {
      */
     private void makeGaps(ArrayList<Ring> ringList) {
         
-                
-        
+        /*
+        Iterate over all Ring objects.
+        The trick is to connect a stop position to a start position of another
+        Ring. The area in between is the Gap. So start positions become stop
+        positions and stop positions become start positions. Some iteratations
+        require different actions The first Gap is from 0 to the first start 
+        position and the last Gap is from the last stop position to the end of 
+        the sequence.
+        */
         for (Ring ring : ringList) {//iterate list with Rings
             
             ArrayList<Gap> gapList = new ArrayList();
-            
-//            System.out.println("Starts: "
-//                + start.size()
-//                + " | Stops: "
-//                + stop.size());
             
             for (int i = 0; i < ring.startPositions.size(); i++) {
                                 
