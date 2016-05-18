@@ -65,11 +65,11 @@ public class BRIGanalyser {
         
                 
         
-       /*
-       Isolate primers
-       */
-       GeneratePrimers gp = new GeneratePrimers();
-       gp.generate(umList);
+        /*
+        Isolate primers
+        */
+        GeneratePrimers gp = new GeneratePrimers();
+        gp.generate(umList);
         
         
     }//start()

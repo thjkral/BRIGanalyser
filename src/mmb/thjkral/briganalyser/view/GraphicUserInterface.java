@@ -153,7 +153,7 @@ public class GraphicUserInterface extends javax.swing.JFrame {
 
         jLabel2.setText("BRIG output folder:");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/testingguis/folder_icon.gif"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mmb/thjkral/briganalyser/view/folder_icon.gif"))); // NOI18N
 
         jTextField_BrigInputPath.setText("\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\ProefdataBRIG\\exampleData\\output_10");
 
@@ -161,7 +161,7 @@ public class GraphicUserInterface extends javax.swing.JFrame {
 
         jLabel4.setText("Reference genome:");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/testingguis/folder_icon.gif"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mmb/thjkral/briganalyser/view/folder_icon.gif"))); // NOI18N
 
         jTextField_refInputPath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,11 +171,11 @@ public class GraphicUserInterface extends javax.swing.JFrame {
 
         jLabel5.setText("Folder with the other used genomes:");
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/testingguis/folder_icon.gif"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mmb/thjkral/briganalyser/view/folder_icon.gif"))); // NOI18N
 
         jLabel49.setText("Output folder:");
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/testingguis/folder_icon.gif"))); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mmb/thjkral/briganalyser/view/folder_icon.gif"))); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -185,7 +185,7 @@ public class GraphicUserInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jTextField_BrigInputPath)
+                        .addComponent(jTextField_BrigInputPath, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
@@ -205,7 +205,7 @@ public class GraphicUserInterface extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel49))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jTextField_outputPath)
                                 .addGap(6, 6, 6)))
@@ -415,7 +415,7 @@ public class GraphicUserInterface extends javax.swing.JFrame {
                                         .addComponent(jTextField_primerProdLength_max, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel34)))))
-                        .addGap(0, 108, Short.MAX_VALUE)))
+                        .addGap(0, 144, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelPrimersLayout.setVerticalGroup(
@@ -568,7 +568,7 @@ public class GraphicUserInterface extends javax.swing.JFrame {
                                 .addComponent(jTextField_probeTm_max, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel47)))
-                        .addGap(0, 156, Short.MAX_VALUE)))
+                        .addGap(0, 192, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelProbesLayout.setVerticalGroup(
@@ -635,7 +635,7 @@ public class GraphicUserInterface extends javax.swing.JFrame {
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addComponent(jTextField_databasePath)
                                 .addGap(6, 6, 6)))
@@ -758,7 +758,7 @@ public class GraphicUserInterface extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField_eValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -913,7 +913,7 @@ public class GraphicUserInterface extends javax.swing.JFrame {
             .addGroup(jPanelAboutLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -947,7 +947,7 @@ public class GraphicUserInterface extends javax.swing.JFrame {
             jPanelSupportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSupportLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelSupportLayout.setVerticalGroup(

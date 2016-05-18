@@ -14,4 +14,11 @@ package mmb.thjkral.briganalyser.model;
  */
 public class MakePairs {
     
+    public void pair () {
+        
+        
+        
+        
+    }
+    
 }

@@ -128,6 +128,8 @@ public class FindUniqueMarkers {
     
     /**
      * Returns the complement of a given DNA sequence.
+     * The sequence is not reversed however. When working with Strings in Java,
+     * it is easier if I can start at the beginning (AKA the '3)
      * @param sequence
      * @return complementary sequence
      */

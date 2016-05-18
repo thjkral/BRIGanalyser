@@ -14,4 +14,6 @@ package mmb.thjkral.briganalyser.model;
  */
 public class GenerateProbes {
     
+    
+    
 }
