@@ -76,15 +76,19 @@ public class FindUniqueMarkers {
     }//compare()
     
     private ArrayList<UniqueMarker> isolateUniqueMarkers (ArrayList<ArrayList<Gap>> overlappingGaps) {
-        
-        //get the higherst startposition and lowest stopposition
-        //this determines the position of the unique marker on the reference
-        
+       
         ArrayList<UniqueMarker> umList = new ArrayList<>();
         
-        ParseXML parser = new ParseXML();
-        //String refSequence = parser.getReferenceSequence("null", 20, 50);
+//        ReadFile parser = new ReadFile();
+//        String refSequence = parser.getReferenceSequence("null", 20, 50);
         
+        /*
+        Determine the start and stop position of the UniqueMarker on the reference
+        genome. From the overlapping gaps, this is the highest start position
+        and the lowest stop position. This is done by comparing one gap to the 
+        rest. Every time a better position is discovered, the best position is
+        saved.
+        */
         for (int i = 0; i < overlappingGaps.size(); i++) {//for every array
             
             //set highest startposition to first Gap in ArrayList
@@ -105,9 +109,17 @@ public class FindUniqueMarkers {
                 }
             }
             
-            
+            /*
+            First, calculate the length (= distance between to positions) of the
+            possible UniqueMarker
+            */
             int difference = stopLowest - startHighest;
-            if (difference >= 38 && difference <= 45) {
+            
+            /*
+            If the length is sufficient: isolate the sequence from the reference-
+            genome and make a UniqueMarker object.
+            */
+            if (difference >= 100 && difference <= 200) {
                 //String markerSequence = refSequence.substring(startHighest, stopLowest);
                 String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
                 UniqueMarker um = new UniqueMarker(i, 
@@ -135,9 +147,20 @@ public class FindUniqueMarkers {
      */
     private String makeComplementary (String sequence) {
         
+        /*
+        Reverse the sequence
+        */
         String seqComp = new StringBuilder(sequence).reverse().toString();
         
+        /*
+        With StringBuilder(), a new String is made.
+        */
         StringBuilder complement = new StringBuilder();
+        
+        /*
+        Traverse through the sequence. Everytime a nucleotide is encountered,
+        add to the new String
+        */
         for (int i = 0; i < seqComp.length(); i++) {
             char c = seqComp.charAt(i);
             
@@ -152,11 +175,11 @@ public class FindUniqueMarkers {
             }
             if (c == 'C') {
                 complement.append('G');
-            }
-            
+            }            
         }
         
         return complement.toString();
-    }
+        
+    }//makeComplementary()
     
 }//class()

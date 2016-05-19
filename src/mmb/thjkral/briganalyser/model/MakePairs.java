@@ -8,15 +8,32 @@
  */
 package mmb.thjkral.briganalyser.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author KralTHJ
  */
 public class MakePairs {
     
-    public void pair () {
+    public void pair (ArrayList<Primer> primerListForward, ArrayList<Primer> primerListReverse) {
         
-        
+        for (Primer pf : primerListForward) {
+            for (Primer pr : primerListReverse) {
+                
+                double difference = 0;
+                if (pf.getMeltTemp() > pr.getMeltTemp()) {
+                    difference = pf.getMeltTemp() - pr.getMeltTemp();
+                } else {
+                    difference = pr.getMeltTemp() - pf.getMeltTemp();
+                }
+                
+                if (difference >= 1 && difference <= 6) {
+                    System.out.println("Pairs!");
+                }
+                
+            }
+        }
         
         
     }

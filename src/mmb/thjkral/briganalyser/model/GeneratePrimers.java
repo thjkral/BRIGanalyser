@@ -71,35 +71,52 @@ public class GeneratePrimers {
         */
         ValidatePrimers validate = new ValidatePrimers();
         
-        if (orientation == PrimerOrientation.REVERSE) {
-            seq = new StringBuilder(seq).reverse().toString();
-        }
         
+        /*
+        Order of traversion:
+        1. from the minimal to the maximal nucleotides that must be preserved
+           (see maxCutoff for example
+        2. For every desired primer length
+        3. Voor elke letter/nucleotide in de sequentie
+        */
         for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {      //from min cutoff to max cutoff
             for (int j = minPrimerLength; j <= maxPrimerLength; j++) {  //for every desired primer length
-                for (int k = 0; k <= seq.length(); k++) {              //for every letter
+                for (int k = 0; k <= seq.length(); k++) {               //for every letter
                     int end = k + j;
                     if (end <= i) {
                         String primerSeq = seq.substring(k, end);
-                        count++;
+                        
+                        /*
+                        If a primer originates from the reverse strand, it must be reversed. It 
+                        is far easier in Java when you can start at the beginning of the String
+                        */
+                        if (orientation == PrimerOrientation.REVERSE) {
+                            seq = new StringBuilder(seq).reverse().toString();
+                        }
                         
                         double meltTemp = validate.calculateTm(primerSeq);
                         double gcContent = validate.calculateGc(primerSeq);
                         
-                        
-                        
+                        /*
+                        Continue is the primer has the correct melt tempersture 
+                        and GC content
+                        */
                         if ((meltTemp >= 58 && meltTemp <= 60) && (gcContent >= 30 && gcContent <= 80)) {
-                            //to database
+                            
+                            boolean diRepeat = validate.checkDiRepeats(primerSeq);
+                            boolean monoRepeat = validate.checkMonoRepeats(primerSeq);
+                            
+                            Primer p = new Primer(number, primerSeq, primerSeq.length(), orientation);    
+                            
                         }
                         
-                        Primer p = new Primer(number, primerSeq, primerSeq.length(), orientation);
                         
                     }
                     
                 }
             }
         }
-        
+//        System.out.println("Made " + count + " primers");
         
     }//makePrimers()
     
@@ -108,93 +125,93 @@ public class GeneratePrimers {
     
     
     
-    private void makeForwardPrimers (String seqF, int number) {
-        /*
-        GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
-        */
-        int maxProdLength = 10;
-        int minProdLength = 6;
-        int maxPrimerLength = 10;
-        int minPrimerLength = 8;
-        
-        int maxCutOff = maxPrimerLength + maxProdLength;
-        int minCutOff = minPrimerLength + minProdLength;
-        
-        int maxAvailableSeq = seqF.length() - maxCutOff;
-        int minAvailableSeq = seqF.length() - minCutOff;
-        
-        ValidatePrimers validate = new ValidatePrimers();
-        
-        for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {      //from min cutoff to max cutoff
-            for (int j = minPrimerLength; j <= maxPrimerLength; j++) {  //for every desired primer length
-                for (int k = 0; k <= seqF.length(); k++) {              //for every letter
-                    int end = k + j;
-                    if (end <= i) {
-                        String primerSeq = seqF.substring(k, end);
-                        
-                        
-                        double meltTemp = validate.calculateTm(primerSeq);
-                        double gcContent = validate.calculateGc(primerSeq);
-                        
-                        
-                        
-                        if ((meltTemp >= 58 && meltTemp <= 60) && (gcContent >= 30 && gcContent <= 80)) {
-                            //to database
-                        }
-                        
-                        Primer p = new Primer(number, primerSeq, primerSeq.length(), PrimerOrientation.FORWARD);
-                        
-                    }
-                    
-                }
-            }
-        }
-        
-        
-    }//makeForwardPrimers()
-    
-    private void makeReversePrimers (String seqR, int number) {
-        /*
-        GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
-        */
-        int maxProdLength = 10;
-        int minProdLength = 6;
-        int maxPrimerLength = 10;
-        int minPrimerLength = 8;
-        
-        int maxCutOff = maxPrimerLength + maxProdLength;
-        int minCutOff = minPrimerLength + minProdLength;
-        
-        int maxAvailableSeq = seqR.length() - maxCutOff;
-        int minAvailableSeq = seqR.length() - minCutOff;
-        
-        seqR = new StringBuilder(seqR).reverse().toString();
-        ValidatePrimers validate = new ValidatePrimers();
-        
-        for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {      //from min cutoff to max cutoff
-            for (int j = minPrimerLength; j <= maxPrimerLength; j++) {  //for every desired primer length
-                for (int k = 0; k <= seqR.length(); k++) {              //for every letter
-                    int end = k + j;
-                    if (end <= i) {
-                        String primerSeq = seqR.substring(k, end);
-                        Primer p = new Primer(number, primerSeq, primerSeq.length(), PrimerOrientation.REVERSE);
-                        
-                        double meltTemp = validate.calculateTm(p.getSequence());
-                        double gcContent = validate.calculateGc(p.getSequence());
-                        
-                        if ((meltTemp >= 58 && meltTemp <= 60) && (gcContent >= 30 && gcContent <= 80)) {
-                            //to database
-                        }
-                        
-                    }
-                    
-                }
-            }
-        }
-        
-        
-    }//makeReversePrimers()
-    
+//    private void makeForwardPrimers (String seqF, int number) {
+//        /*
+//        GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
+//        */
+//        int maxProdLength = 10;
+//        int minProdLength = 6;
+//        int maxPrimerLength = 10;
+//        int minPrimerLength = 8;
+//        
+//        int maxCutOff = maxPrimerLength + maxProdLength;
+//        int minCutOff = minPrimerLength + minProdLength;
+//        
+//        int maxAvailableSeq = seqF.length() - maxCutOff;
+//        int minAvailableSeq = seqF.length() - minCutOff;
+//        
+//        ValidatePrimers validate = new ValidatePrimers();
+//        
+//        for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {      //from min cutoff to max cutoff
+//            for (int j = minPrimerLength; j <= maxPrimerLength; j++) {  //for every desired primer length
+//                for (int k = 0; k <= seqF.length(); k++) {              //for every letter
+//                    int end = k + j;
+//                    if (end <= i) {
+//                        String primerSeq = seqF.substring(k, end);
+//                        
+//                        
+//                        double meltTemp = validate.calculateTm(primerSeq);
+//                        double gcContent = validate.calculateGc(primerSeq);
+//                        
+//                        
+//                        
+//                        if ((meltTemp >= 58 && meltTemp <= 60) && (gcContent >= 30 && gcContent <= 80)) {
+//                            //to database
+//                        }
+//                        
+//                        Primer p = new Primer(number, primerSeq, primerSeq.length(), PrimerOrientation.FORWARD);
+//                        
+//                    }
+//                    
+//                }
+//            }
+//        }
+//        
+//        
+//    }//makeForwardPrimers()
+//    
+//    private void makeReversePrimers (String seqR, int number) {
+//        /*
+//        GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
+//        */
+//        int maxProdLength = 10;
+//        int minProdLength = 6;
+//        int maxPrimerLength = 10;
+//        int minPrimerLength = 8;
+//        
+//        int maxCutOff = maxPrimerLength + maxProdLength;
+//        int minCutOff = minPrimerLength + minProdLength;
+//        
+//        int maxAvailableSeq = seqR.length() - maxCutOff;
+//        int minAvailableSeq = seqR.length() - minCutOff;
+//        
+//        seqR = new StringBuilder(seqR).reverse().toString();
+//        ValidatePrimers validate = new ValidatePrimers();
+//        
+//        for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {      //from min cutoff to max cutoff
+//            for (int j = minPrimerLength; j <= maxPrimerLength; j++) {  //for every desired primer length
+//                for (int k = 0; k <= seqR.length(); k++) {              //for every letter
+//                    int end = k + j;
+//                    if (end <= i) {
+//                        String primerSeq = seqR.substring(k, end);
+//                        Primer p = new Primer(number, primerSeq, primerSeq.length(), PrimerOrientation.REVERSE);
+//                        
+//                        double meltTemp = validate.calculateTm(p.getSequence());
+//                        double gcContent = validate.calculateGc(p.getSequence());
+//                        
+//                        if ((meltTemp >= 58 && meltTemp <= 60) && (gcContent >= 30 && gcContent <= 80)) {
+//                            //to database
+//                        }
+//                        
+//                    }
+//                    
+//                }
+//            }
+//        }
+//        
+//        
+//    }//makeReversePrimers()
+//    
     
     
     

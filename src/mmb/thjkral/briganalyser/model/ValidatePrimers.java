@@ -101,6 +101,7 @@ public class ValidatePrimers {
         */
         while (m.find()) {
             useable = false;
+            System.out.println(seq);
         }
         
         return useable;
@@ -173,7 +174,7 @@ public class ValidatePrimers {
         }
         
         return isUsable;
-    }
+    }//threeEnd()
     
 
     public boolean checkThreeTerminal (String seq) {

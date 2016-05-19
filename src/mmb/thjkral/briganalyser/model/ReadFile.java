@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
  * Utilises the Java Document Object Model.
  * @author KralTHJ
  */
-public class ParseXML {
+public class ReadFile {
 
     /**
      * Makes a Document object of the input XML file.

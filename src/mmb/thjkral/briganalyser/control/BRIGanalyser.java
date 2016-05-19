@@ -42,7 +42,7 @@ public class BRIGanalyser {
         /*
         Make Document object from XML file
         */
-        ParseXML parser = new ParseXML();
+        ReadFile parser = new ReadFile();
         Document doc = parser.makeDocument(filePath);
         
         /*
