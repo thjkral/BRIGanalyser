@@ -16,6 +16,8 @@ import mmb.thjkral.briganalyser.enums.PrimerOrientation;
  * @author KralTHJ
  */
 public class GeneratePrimers {
+    
+    int count = 0;
 
     public void generate(ArrayList<UniqueMarker> umList) {
         
@@ -25,7 +27,7 @@ public class GeneratePrimers {
             makePrimers(u.getSequenceReverse(), PrimerOrientation.REVERSE, u.getNumber());
         }
         
-        
+        System.out.println("Made " + count + " primers");
         
     }//generate()
     
@@ -39,7 +41,6 @@ public class GeneratePrimers {
      * @param number 
      */
     private void makePrimers (String seq, PrimerOrientation orientation, int number) {
-        int count = 0;
         /*
         GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
         */
@@ -98,15 +99,19 @@ public class GeneratePrimers {
                         double gcContent = validate.calculateGc(primerSeq);
                         
                         /*
-                        Continue is the primer has the correct melt tempersture 
+                        Continue is the primer has the correct melt tempersture
                         and GC content
                         */
-                        if ((meltTemp >= 58 && meltTemp <= 60) && (gcContent >= 30 && gcContent <= 80)) {
-                            
+                        if (/*meltTemp >= 58.0 && meltTemp <= 60.0 &&*/ gcContent >= 30.0 && gcContent <= 80.0) {
                             boolean diRepeat = validate.checkDiRepeats(primerSeq);
                             boolean monoRepeat = validate.checkMonoRepeats(primerSeq);
                             
-                            Primer p = new Primer(number, primerSeq, primerSeq.length(), orientation);    
+                            if (monoRepeat && diRepeat) {
+                                count++;
+                                Primer p = new Primer(number, primerSeq, primerSeq.length(), orientation);
+                            }
+                            
+                                
                             
                         }
                         
@@ -116,7 +121,6 @@ public class GeneratePrimers {
                 }
             }
         }
-//        System.out.println("Made " + count + " primers");
         
     }//makePrimers()
     

@@ -31,6 +31,7 @@ public class ReadFile {
 
     /**
      * Makes a Document object of the input XML file.
+     * 
      * @param filePath
      * @return Document doc
      */
@@ -70,7 +71,7 @@ public class ReadFile {
      * @param fileLocation
      * @param start
      * @param stop
-     * @return
+     * @return String
      */
     public String getReferenceSequence(String fileLocation, int start, int stop) {
         
@@ -90,8 +91,6 @@ public class ReadFile {
         stop = stop - 1;
         
         Path path = Paths.get(fileLocation);
-        
-        
         
         try (BufferedReader br = Files.newBufferedReader(path, Charset.defaultCharset())){
             
@@ -122,6 +121,8 @@ public class ReadFile {
                     }
                     
                 }
+                
+                
                 
             }
             br.close();

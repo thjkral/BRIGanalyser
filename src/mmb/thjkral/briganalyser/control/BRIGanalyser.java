@@ -51,6 +51,7 @@ public class BRIGanalyser {
         IsolateGaps iso = new IsolateGaps();
         ArrayList<Ring> ringList = iso.isolate(doc);
         
+        CGViewTest test = new CGViewTest();        
 //        System.out.println("Number of gaps (not unique):");
 //        for (Ring r : ringList) {
 //            System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
@@ -63,13 +64,13 @@ public class BRIGanalyser {
         ArrayList<UniqueMarker> umList = fum.start(ringList);
 //        System.out.println("Found " + umList.size() + " unique markers in total");
         
-                
+        test.test(umList);        
         
         /*
         Isolate primers
         */
-        GeneratePrimers gp = new GeneratePrimers();
-        gp.generate(umList);
+//        GeneratePrimers gp = new GeneratePrimers();
+//        gp.generate(umList);
         
         
     }//start()

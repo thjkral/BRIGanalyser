@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 /**
  * Finds unique regions in the genome of the outbreak strain.
+ * 
  * Requires an ArrayList with Ring objects.
  * @author KralTHJ
  */
@@ -70,7 +71,7 @@ public class FindUniqueMarkers {
             }
             
         }
-        
+//        System.out.println("There are " + overlappingGaps.size() + " overlapping gaps");
         return overlappingGaps;
         
     }//compare()
@@ -119,9 +120,10 @@ public class FindUniqueMarkers {
             If the length is sufficient: isolate the sequence from the reference-
             genome and make a UniqueMarker object.
             */
-            if (difference >= 100 && difference <= 200) {
-                //String markerSequence = refSequence.substring(startHighest, stopLowest);
-                String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
+            if (difference >= 0 && difference <= 1) {
+//                String markerSequence = refSequence.substring(startHighest, stopLowest);
+//                markerSequence = markerSequence.toUpperCase();
+                String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGCATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
                 UniqueMarker um = new UniqueMarker(i, 
                         startHighest, 
                         stopLowest, 

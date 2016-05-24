@@ -24,7 +24,7 @@ public class ValidatePrimers {
      * is melted of its counterpart
      * 
      * @param seq
-     * @return melting temperature
+     * @return double
      */
     public double calculateTm (String seq) {
                
@@ -54,21 +54,27 @@ public class ValidatePrimers {
      * sequence.
      * 
      * @param seq
-     * @return
+     * @return double
      */
     public double calculateGc (String seq) {
         
         /*
         Count Guanine and Cytosine nucleotides
         */
-        int nucC = seq.length() - seq.replace("C", "").length();
-        int nucG = seq.length() - seq.replace("G", "").length();
+        int count = 0;
+        double gcContent = 0;
+        for (int i = 0; i < seq.length(); i++) {
+            if (seq.charAt(i) == 'G' || seq.charAt(i) == 'C') {
+                count++;
+            }
+        }
         
         /*
         Implement formula:
         (G+C) / total * 100%
         */
-        double gcContent = ((nucG + nucC) / seq.length()) * 100;
+        gcContent = (count / (double)seq.length()) * 100;
+        gcContent = Math.round(gcContent);
         
         return gcContent;
         
