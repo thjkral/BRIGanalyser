@@ -15,15 +15,20 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- *
+ * Makes Ring and Gap objects from the XML input.
+ * The XML describes the rings BRIG makes. These are not continuous however and
+ * have start- and stop positions. The Gaps in between are of great interest and
+ * are isolated too.
+ * 
  * @author KralTHJ
  */
 public class IsolateGaps {
     
     /**
-     *
-     * @param doc
-     * @return
+     * Controls the continuity of the Class.
+     * 
+     * @param doc Document type made by the Documentbuilder package
+     * @return ArrayList with Ring objects, each containing a ArrayList with gaps
      */
     public ArrayList<Ring> isolate (Document doc) {
         

@@ -20,7 +20,7 @@ import org.xml.sax.SAXException;
 public class CGViewTest implements CgviewConstants {
     
     public void test (ArrayList<UniqueMarker> umList){
-        int length = 5357923;
+        int length = 4809037;
 	Cgview cgview = new Cgview(length);
 	
 	//some optional settings
@@ -44,16 +44,16 @@ public class CGViewTest implements CgviewConstants {
             fr.setDecoration(DECORATION_CLOCKWISE_ARROW);
         }
         
-        try {
-        CgviewFactory factory = new CgviewFactory();
-        factory.addToCgviewFromFile(cgview, "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\exampleData\\output_12\\scratch\\BRIGExample.fna.xml");
-        } catch (SAXException | IOException e) {
-            System.out.println("Whoops: " + e.getMessage());
-        }
+//        try {
+//        CgviewFactory factory = new CgviewFactory();
+//        factory.addToCgviewFromFile(cgview, "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\exampleData\\output_12\\scratch\\BRIGExample.fna.xml");
+//        } catch (SAXException | IOException e) {
+//            System.out.println("Whoops: " + e.getMessage());
+//        }
         
 	try {
 	    //create a PNG file
-            CgviewIO.writeToPNGFile(cgview, "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\oefendata\\testFile.png");
+            CgviewIO.writeToPNGFile(cgview, "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\oefendata\\testFile_2.png");
 	}
         catch (IOException e) {
 	    e.printStackTrace(System.err);

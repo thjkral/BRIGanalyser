@@ -22,7 +22,7 @@ public class FindUniqueMarkers {
     GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
     */
     int totalLength = 5357923;
-    int numRings = 6;
+    int numRings = 2;
     
     /**
      * Coordinates the actions of this class by given the right information to 
@@ -139,7 +139,7 @@ public class FindUniqueMarkers {
             If the length is sufficient: isolate the sequence from the reference-
             genome and make a UniqueMarker object.
             */
-            if (difference >= 100 && difference <= 200) {
+            if (difference >= 300 && difference <= 500) {
                 String markerSequence = parser.getReferenceSequence("", startHighest, stopLowest);
 //                String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGCATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
                 UniqueMarker um = new UniqueMarker(i, 

@@ -28,8 +28,8 @@ public class BRIGanalyser {
         
         BRIGanalyser ba = new BRIGanalyser();
         
-        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\exampleData\\output_12\\scratch\\BRIGExample.fna.xml";
-//        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\ownData\\output\\output_1\\scratch\\SalmonellaEnterica_CT18.fasta.xml";
+//        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\exampleData\\output_12\\scratch\\BRIGExample.fna.xml";
+        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\ownData\\output\\output_1\\scratch\\SalmonellaEnterica_CT18.fasta.xml";
         ba.start(filePath);
     }//main()
 
@@ -44,12 +44,13 @@ public class BRIGanalyser {
         Make Document object from XML file
         */
         ReadFile parser = new ReadFile();
+        System.out.println("* reading file");
         Document doc = parser.makeDocument(filePath);
-        
         /*
         Isolate gaps from the doc
         */
         IsolateGaps iso = new IsolateGaps();
+        System.out.println("\n* isolating gaps");
         ArrayList<Ring> ringList = iso.isolate(doc);
         
                
@@ -62,8 +63,9 @@ public class BRIGanalyser {
         Find the unique markers
         */
         FindUniqueMarkers fum = new FindUniqueMarkers();
+        System.out.println("\n* finding unique markers");
         ArrayList<UniqueMarker> umList = fum.start(ringList);
-        System.out.println("\nFound " + umList.size() + " unique markers in total");
+        System.out.println("Found " + umList.size() + " unique markers in total");
         for (UniqueMarker u : umList) {
             System.out.println(u.toString());
         }
@@ -75,8 +77,9 @@ public class BRIGanalyser {
         /*
         Isolate primers
         */
-//        GeneratePrimers gp = new GeneratePrimers();
-//        gp.generate(umList);
+        GeneratePrimers gp = new GeneratePrimers();
+        System.out.println("* generating primers");
+        gp.generate(umList);
         
         
     }//start()

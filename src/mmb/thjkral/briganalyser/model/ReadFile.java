@@ -23,14 +23,14 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
- * Execute operations on XML files.
- * Utilises the Java Document Object Model.
+ * Contains methods for reading different files.
+ * Can read XML files and returns the Document object. 
  * @author KralTHJ
  */
 public class ReadFile {
 
     /**
-     * Makes a Document object of the input XML file.
+     * Makes a Document object of a input XML file.
      * 
      * @param filePath
      * @return Document doc
@@ -142,7 +142,8 @@ public class ReadFile {
             br.close();
             
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error while reading reference genome: " 
+                    + e.getMessage());
         }
         
         referenceGenomeSub = referenceGenomeSub.replaceAll("\\s+","");

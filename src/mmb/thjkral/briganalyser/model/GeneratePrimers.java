@@ -46,10 +46,10 @@ public class GeneratePrimers {
         /*
         GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
         */
-        int maxProdLength = 10;
-        int minProdLength = 6;
-        int maxPrimerLength = 10;
-        int minPrimerLength = 8;
+        int maxProdLength = 100;
+        int minProdLength = 50;
+        int maxPrimerLength = 22;
+        int minPrimerLength = 18;
         
         
         /*
@@ -82,7 +82,7 @@ public class GeneratePrimers {
         2. For every desired primer length
         3. Voor elke letter/nucleotide in de sequentie
         */
-        for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {      //from min cutoff to max cutoff
+        breaklabel: for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {      //from min cutoff to max cutoff
             for (int j = minPrimerLength; j <= maxPrimerLength; j++) {  //for every desired primer length
                 for (int k = 0; k <= seq.length(); k++) {               //for every letter
                     int end = k + j;
@@ -106,13 +106,13 @@ public class GeneratePrimers {
                         Continue is the primer has the correct melt tempersture
                         and GC content
                         */
-                        if (/*meltTemp >= 58.0 && meltTemp <= 60.0 &&*/ gcContent >= 30.0 && gcContent <= 80.0) {
+                        if (meltTemp >= 58.0 && meltTemp <= 60.0 && gcContent >= 30.0 && gcContent <= 80.0) {
                             boolean diRepeat = validate.checkDiRepeats(primerSeq);
                             boolean monoRepeat = validate.checkMonoRepeats(primerSeq);
                             
                             if (monoRepeat && diRepeat) {
                                 count++;
-                                Primer p = new Primer(number, primerSeq, primerSeq.length(), orientation);
+//                                Primer p = new Primer(number, primerSeq, primerSeq.length(), orientation);
                             }
                             
                         }
