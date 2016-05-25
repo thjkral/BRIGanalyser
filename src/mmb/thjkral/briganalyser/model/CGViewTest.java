@@ -11,6 +11,7 @@ import ca.ualberta.stothard.cgview.*;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -23,15 +24,15 @@ public class CGViewTest implements CgviewConstants {
 	Cgview cgview = new Cgview(length);
 	
 	//some optional settings
-	cgview.setWidth(600);
-	cgview.setHeight(600);
-	cgview.setBackboneRadius(160.0f);
+	cgview.setWidth(1000);
+	cgview.setHeight(1000);
+	cgview.setBackboneRadius(1600.0f);
 	cgview.setTitle("Test");
 	cgview.setLabelPlacementQuality(10);
 	cgview.setShowWarning(true);
 	cgview.setLabelLineLength(8.0d);
 	cgview.setLabelLineThickness(0.5f);
-
+        
 	//create a FeatureSlot to hold sequence features
         FeatureSlot featureSlot = new FeatureSlot(cgview, DIRECT_STRAND);
         for (UniqueMarker u : umList) {//for every Ring
@@ -43,7 +44,12 @@ public class CGViewTest implements CgviewConstants {
             fr.setDecoration(DECORATION_CLOCKWISE_ARROW);
         }
         
-        
+        try {
+        CgviewFactory factory = new CgviewFactory();
+        factory.addToCgviewFromFile(cgview, "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\exampleData\\output_12\\scratch\\BRIGExample.fna.xml");
+        } catch (SAXException | IOException e) {
+            System.out.println("Whoops: " + e.getMessage());
+        }
         
 	try {
 	    //create a PNG file

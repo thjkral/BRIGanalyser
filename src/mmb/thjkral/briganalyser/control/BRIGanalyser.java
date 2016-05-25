@@ -29,6 +29,7 @@ public class BRIGanalyser {
         BRIGanalyser ba = new BRIGanalyser();
         
         String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\exampleData\\output_12\\scratch\\BRIGExample.fna.xml";
+//        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\ownData\\output\\output_1\\scratch\\SalmonellaEnterica_CT18.fasta.xml";
         ba.start(filePath);
     }//main()
 
@@ -51,20 +52,25 @@ public class BRIGanalyser {
         IsolateGaps iso = new IsolateGaps();
         ArrayList<Ring> ringList = iso.isolate(doc);
         
-        CGViewTest test = new CGViewTest();        
-//        System.out.println("Number of gaps (not unique):");
-//        for (Ring r : ringList) {
-//            System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
-//        }
+               
+        System.out.println("Number of gaps (not unique):");
+        for (Ring r : ringList) {
+            System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
+        }
         
         /*
         Find the unique markers
         */
         FindUniqueMarkers fum = new FindUniqueMarkers();
         ArrayList<UniqueMarker> umList = fum.start(ringList);
-//        System.out.println("Found " + umList.size() + " unique markers in total");
+        System.out.println("\nFound " + umList.size() + " unique markers in total");
+        for (UniqueMarker u : umList) {
+            System.out.println(u.toString());
+        }
         
-        test.test(umList);        
+
+//        CGViewTest test = new CGViewTest();
+//        test.test(umList); 
         
         /*
         Isolate primers

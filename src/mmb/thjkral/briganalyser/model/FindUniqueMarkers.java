@@ -25,7 +25,9 @@ public class FindUniqueMarkers {
     int numRings = 6;
     
     /**
-     *
+     * Coordinates the actions of this class by given the right information to 
+     * the corresponding method.
+     * 
      * @param ringList
      * @return 
      */
@@ -38,17 +40,35 @@ public class FindUniqueMarkers {
         
     }//start()
 
+    
+    /**
+     * Compares the gaps of the first ring to the gaps of other rings.
+     * The goal is to determine which gaps are overlapping. This means there
+     * might be a suitable UniqueMarker.
+     * 
+     * @param ringList  ArrayList with Ring objects
+     * @return 
+     */
     private ArrayList<ArrayList<Gap>> compare(ArrayList<Ring> ringList) {
         
+        /*
+        This ArrayList contains other ArrayLists which contain gaps that overlap
+        */
         ArrayList<ArrayList<Gap>> overlappingGaps = new ArrayList<>();
         
-        //compare gaps of first ring with the other gaps
+        /*
+        Take the first Ring object from the ArrayList and compare all his Gap
+        objects with those of the other Ring objects
+        */
         for (int i = 0; i < ringList.get(0).getGapsArray().size(); i++) {//for every Gap in Ring 1
             
             Gap gapOne = (Gap) ringList.get(0).getGapsArray().get(i);
             int start = gapOne.getStartCor();
             int stop = gapOne.getStopCor();
             
+            /*
+            
+            */
             ArrayList<Gap> matches = new ArrayList<>();
             matches.add(gapOne);
             
@@ -80,8 +100,7 @@ public class FindUniqueMarkers {
        
         ArrayList<UniqueMarker> umList = new ArrayList<>();
         
-//        ReadFile parser = new ReadFile();
-//        String refSequence = parser.getReferenceSequence("null", 20, 50);
+        ReadFile parser = new ReadFile();
         
         /*
         Determine the start and stop position of the UniqueMarker on the reference
@@ -120,16 +139,15 @@ public class FindUniqueMarkers {
             If the length is sufficient: isolate the sequence from the reference-
             genome and make a UniqueMarker object.
             */
-            if (difference >= 0 && difference <= 1) {
-//                String markerSequence = refSequence.substring(startHighest, stopLowest);
-//                markerSequence = markerSequence.toUpperCase();
-                String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGCATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
+            if (difference >= 100 && difference <= 200) {
+                String markerSequence = parser.getReferenceSequence("", startHighest, stopLowest);
+//                String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGCATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
                 UniqueMarker um = new UniqueMarker(i, 
                         startHighest, 
                         stopLowest, 
                         difference, 
-                        tempSequence,
-                        makeComplementary(tempSequence));
+                        markerSequence,
+                        makeComplementary(markerSequence));
                 umList.add(um);
             }
         }

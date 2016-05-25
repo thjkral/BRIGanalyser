@@ -75,16 +75,9 @@ public class ReadFile {
      */
     public String getReferenceSequence(String fileLocation, int start, int stop) {
         
-        /*
-        What I want:
-        >Genome
-        acagaattgaTCTGAcggttttctctgacagcatacaatcaagtctaacagtccgccttg
-        */
-        
         fileLocation = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Programs\\BRIG\\BRIG_examples\\Chapter5_6_8_wholeGenomeExamples\\BRIGExample.fna";
         String referenceGenomeSub = "";
         int passedLetters = 0;
-        int passedLines = 0;
         
         //edit to indices
         start = start - 1;
@@ -98,31 +91,52 @@ public class ReadFile {
             
             while ((line = br.readLine()) != null) {
                 
-                if (!line.startsWith(">")) {//if line doesn't start with description
+                if (line.startsWith(">")) {
+                    continue;
+                } else {//if line doesn't start with description
                     passedLetters = passedLetters + line.length();
-                    
-                    if (passedLines != 1) {
-                        start = start - passedLetters;
-                        stop = stop - passedLetters;
-                    }
-                    
-                    
-                    //subsequence is on one line
-                    if (start < passedLetters && stop <= passedLetters) {                        
-                        referenceGenomeSub = line.substring(start, stop);                        
-                    }
-                    
-                    //subsequence is on multiple lines
-                    else if (start <= passedLetters && stop > passedLetters) {
-                        referenceGenomeSub = line.substring(start);
-                    }
-                    else if (passedLetters > stop && !referenceGenomeSub.isEmpty()) {
-                        referenceGenomeSub = referenceGenomeSub.concat(line.substring(0, stop));
-                    }
-                    
                 }
                 
-                
+                /*
+                Start of by determining if the current line is within range
+                */
+                if (start < passedLetters) {                    
+                    /*
+                    adjust the indices for proper substrings
+                    */                    
+                    int startIndex = start - (passedLetters - line.length());
+                    int stopIndex = stop - (passedLetters - line.length());
+
+                    /*
+                    Determine if this is the first line encountered within range
+                    */
+                    if (referenceGenomeSub.isEmpty()) {
+                        /*
+                        Determine if the stop position is on the current line also
+                        */
+                        if (stop <= passedLetters) {//is the stop also on this line?
+                            referenceGenomeSub = line.substring(startIndex, stopIndex);
+                            break;
+                        } else {
+                            String tempSeq = line.substring(startIndex);
+                            referenceGenomeSub = referenceGenomeSub.concat(tempSeq);
+                        }
+
+                    } else {
+                        /*
+                        Determine if the stop positions is on the current line
+                        */
+                        if (stop <= passedLetters) {
+                            String tempSeq = line.substring(0, stopIndex);
+                            referenceGenomeSub = referenceGenomeSub.concat(tempSeq);
+                            break;
+                        } else {
+                            referenceGenomeSub = referenceGenomeSub.concat(line);
+                        }
+                            
+                    }
+                            
+                }
                 
             }
             br.close();
@@ -132,7 +146,7 @@ public class ReadFile {
         }
         
         referenceGenomeSub = referenceGenomeSub.replaceAll("\\s+","");
-        System.out.println("referenceGenomeSub= " + referenceGenomeSub);
+        referenceGenomeSub = referenceGenomeSub.toUpperCase();
         
         return referenceGenomeSub;
         
