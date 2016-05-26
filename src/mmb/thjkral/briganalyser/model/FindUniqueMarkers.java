@@ -96,6 +96,11 @@ public class FindUniqueMarkers {
         
     }//compare()
     
+    /**
+     * Takes 
+     * @param overlappingGaps
+     * @return 
+     */
     private ArrayList<UniqueMarker> isolateUniqueMarkers (ArrayList<ArrayList<Gap>> overlappingGaps) {
        
         ArrayList<UniqueMarker> umList = new ArrayList<>();
@@ -139,7 +144,7 @@ public class FindUniqueMarkers {
             If the length is sufficient: isolate the sequence from the reference-
             genome and make a UniqueMarker object.
             */
-            if (difference >= 1000/* && difference <= 500*/) {
+            if (difference >= 200 && difference <= 500) {
                 String markerSequence = parser.getReferenceSequence("", startHighest, stopLowest);
 //                String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGCATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
                 UniqueMarker um = new UniqueMarker(i, 

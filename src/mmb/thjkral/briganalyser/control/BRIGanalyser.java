@@ -8,7 +8,9 @@
  */
 package mmb.thjkral.briganalyser.control;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import mmb.thjkral.briganalyser.model.*;
 import org.w3c.dom.Document;
 
@@ -78,8 +80,15 @@ public class BRIGanalyser {
         Isolate primers
         */
         GeneratePrimers gp = new GeneratePrimers();
+        
         System.out.println("* generating primers");
+        String timeStampBegin = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss").format(Calendar.getInstance().getTime());
+        System.out.println("Started at: " + timeStampBegin);
+        
         gp.generate(umList);
+        
+        String timeStampEnd = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        System.out.println("Ended at: " + timeStampEnd);
         
         
     }//start()

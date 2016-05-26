@@ -46,8 +46,8 @@ public class GeneratePrimers {
         /*
         GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
         */
-        int maxProdLength = 500;
-        int minProdLength = 200;
+        int maxProdLength = 150;
+        int minProdLength = 80;
         int maxPrimerLength = 22;
         int minPrimerLength = 18;
         
@@ -101,7 +101,7 @@ public class GeneratePrimers {
                         double gcContent = validate.calculateGc(primerSeq);
                         
                         countTotal++;
-                        System.out.println(countTotal);
+//                        System.out.println(countTotal);
                         
                         /*
                         Continue is the primer has the correct melt tempersture
@@ -123,8 +123,6 @@ public class GeneratePrimers {
                 }
             }
         }
-        
-        
         
     }//makePrimers()
  
