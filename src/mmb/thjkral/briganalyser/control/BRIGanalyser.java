@@ -56,9 +56,9 @@ public class BRIGanalyser {
         ArrayList<Ring> ringList = iso.isolate(doc);
         
                
-        System.out.println("Number of gaps (not unique):");
+        System.out.println("\tNumber of gaps (not unique):");
         for (Ring r : ringList) {
-            System.out.println("Ring " + r.getName() + ": " + r.getGapsArray().size());
+            System.out.println("\tRing " + r.getName() + ": " + r.getGapsArray().size());
         }
         
         /*
@@ -67,7 +67,7 @@ public class BRIGanalyser {
         FindUniqueMarkers fum = new FindUniqueMarkers();
         System.out.println("\n* finding unique markers");
         ArrayList<UniqueMarker> umList = fum.start(ringList);
-        System.out.println("Found " + umList.size() + " unique markers in total");
+        System.out.println("\tFound " + umList.size() + " unique markers in total");
 //        for (UniqueMarker u : umList) {
 //            System.out.println(u.toString());
 //        }
@@ -81,14 +81,14 @@ public class BRIGanalyser {
         */
         GeneratePrimers gp = new GeneratePrimers();
         
-        System.out.println("* generating primers");
-        String timeStampBegin = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss").format(Calendar.getInstance().getTime());
-        System.out.println("Started at: " + timeStampBegin);
+        System.out.println("\n* generating primers");
+        String timeStampBegin = new SimpleDateFormat("HH:mm:ss (dd/MM/yyyy)").format(Calendar.getInstance().getTime());
+        System.out.println("\tStarted making primers at: " + timeStampBegin);
         
         gp.generate(umList);
         
-        String timeStampEnd = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-        System.out.println("Ended at: " + timeStampEnd);
+        String timeStampEnd = new SimpleDateFormat("HH:mm:ss (dd/MM/yyyy)").format(Calendar.getInstance().getTime());
+        System.out.println("\tEnded making primers at: " + timeStampEnd);
         
         
     }//start()

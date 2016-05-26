@@ -28,8 +28,8 @@ public class GeneratePrimers {
             makePrimers(u.getSequenceReverse(), PrimerOrientation.REVERSE, u.getNumber());
         }
         
-        System.out.println("\nMade " + countTotal + " primers in total");
-        System.out.println("Saved " + count + " primers");
+        System.out.println("\tMade " + countTotal + " primers in total");
+        System.out.println("\tSaved " + count + " primers");
         
     }//generate()
     
