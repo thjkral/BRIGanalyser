@@ -46,8 +46,8 @@ public class GeneratePrimers {
         /*
         GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
         */
-        int maxProdLength = 100;
-        int minProdLength = 50;
+        int maxProdLength = 500;
+        int minProdLength = 200;
         int maxPrimerLength = 22;
         int minPrimerLength = 18;
         
@@ -82,9 +82,9 @@ public class GeneratePrimers {
         2. For every desired primer length
         3. Voor elke letter/nucleotide in de sequentie
         */
-        breaklabel: for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {      //from min cutoff to max cutoff
-            for (int j = minPrimerLength; j <= maxPrimerLength; j++) {  //for every desired primer length
-                for (int k = 0; k <= seq.length(); k++) {               //for every letter
+        breaklabel: for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {  //from min cutoff to max cutoff
+            for (int j = minPrimerLength; j <= maxPrimerLength; j++) {          //for every desired primer length
+                for (int k = 0; k <= seq.length(); k++) {                       //for every letter
                     int end = k + j;
                     if (end <= i) {
                         String primerSeq = seq.substring(k, end);
@@ -101,6 +101,7 @@ public class GeneratePrimers {
                         double gcContent = validate.calculateGc(primerSeq);
                         
                         countTotal++;
+                        System.out.println(countTotal);
                         
                         /*
                         Continue is the primer has the correct melt tempersture

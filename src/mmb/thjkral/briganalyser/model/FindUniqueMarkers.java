@@ -139,7 +139,7 @@ public class FindUniqueMarkers {
             If the length is sufficient: isolate the sequence from the reference-
             genome and make a UniqueMarker object.
             */
-            if (difference >= 300 && difference <= 500) {
+            if (difference >= 1000/* && difference <= 500*/) {
                 String markerSequence = parser.getReferenceSequence("", startHighest, stopLowest);
 //                String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGCATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
                 UniqueMarker um = new UniqueMarker(i, 

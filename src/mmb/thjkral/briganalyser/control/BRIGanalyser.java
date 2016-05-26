@@ -66,9 +66,9 @@ public class BRIGanalyser {
         System.out.println("\n* finding unique markers");
         ArrayList<UniqueMarker> umList = fum.start(ringList);
         System.out.println("Found " + umList.size() + " unique markers in total");
-        for (UniqueMarker u : umList) {
-            System.out.println(u.toString());
-        }
+//        for (UniqueMarker u : umList) {
+//            System.out.println(u.toString());
+//        }
         
 
 //        CGViewTest test = new CGViewTest();
