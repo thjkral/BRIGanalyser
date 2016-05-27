@@ -31,7 +31,7 @@ public class BRIGanalyser {
         BRIGanalyser ba = new BRIGanalyser();
         
 //        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\exampleData\\output_12\\scratch\\BRIGExample.fna.xml";
-        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\dataSigrid\\output_1\\scratch\\genome_1_16090044731-01.fna.xml";
+        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\outputBRIG\\dataSigrid\\output_1\\scratch\\genome_1_16090044731-01.fna.xml";
         ba.start(filePath);
     }//main()
 

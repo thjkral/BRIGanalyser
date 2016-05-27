@@ -31,10 +31,10 @@ public class GeneratePrimers {
         }
         
         System.out.println("\tMade " + countTotal + " primers in total");
-        double percentage = (countTotal / count) * 100;
-        System.out.println("\tSaved " + count + " primers. This is " 
-                + percentage 
-                + "%");
+//        double percentage = (countTotal / count) * 100;
+//        System.out.println("\tSaved " + count + " primers. This is " 
+//                + percentage 
+//                + "%");
         
         MakePairs mp = new MakePairs();
         mp.pair(forwardList, reverseList);

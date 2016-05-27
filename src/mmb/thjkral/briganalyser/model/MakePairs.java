@@ -24,12 +24,37 @@ public class MakePairs {
         for (Primer pf : primerListForward) {
             for (Primer pr : primerListReverse) {
                 
+                System.out.println("Primer " + pf.markerNumber + " with primer " + pr.markerNumber);
                 
-                double difference = 0;
+                double difference;
                 if (pf.getMeltTemp() > pr.getMeltTemp()) {
                     difference = pf.getMeltTemp() - pr.getMeltTemp();
                 } else {
                     difference = pr.getMeltTemp() - pf.getMeltTemp();
+                }
+                
+                if (difference >= 1 && difference <= 6) {
+                    count++;
+                }
+                
+            }
+        }
+        
+        for (int i = 0; i < primerListForward.size(); i++) {
+            for (int j = 0; j < primerListReverse.size(); j++) {
+                
+                double tmForward = primerListForward.get(i).getMeltTemp();
+                double tmReverse = primerListReverse.get(j).getMeltTemp();
+
+                double difference;
+                if (tmForward > tmReverse) {
+                    difference = tmForward - tmReverse;
+                }
+                
+                else if (tmForward < tmReverse) {
+                    difference = tmReverse - tmForward;
+                } else {
+                    difference = 0;
                 }
                 
                 if (difference >= 1 && difference <= 6) {
