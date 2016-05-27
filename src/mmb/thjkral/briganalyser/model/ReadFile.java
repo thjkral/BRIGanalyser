@@ -75,7 +75,7 @@ public class ReadFile {
      */
     public String getReferenceSequence(String fileLocation, int start, int stop) {
         
-        fileLocation = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Programs\\BRIG\\BRIG_examples\\Chapter5_6_8_wholeGenomeExamples\\BRIGExample.fna";
+        fileLocation = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\real_data\\genome_1_16090044731-01.fna";
         String referenceGenomeSub = "";
         int passedLetters = 0;
         

@@ -31,7 +31,7 @@ public class BRIGanalyser {
         BRIGanalyser ba = new BRIGanalyser();
         
 //        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\exampleData\\output_12\\scratch\\BRIGExample.fna.xml";
-        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\ownData\\output\\output_1\\scratch\\SalmonellaEnterica_CT18.fasta.xml";
+        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\dataSigrid\\output_1\\scratch\\genome_1_16090044731-01.fna.xml";
         ba.start(filePath);
     }//main()
 
@@ -68,9 +68,20 @@ public class BRIGanalyser {
         System.out.println("\n* finding unique markers");
         ArrayList<UniqueMarker> umList = fum.start(ringList);
         System.out.println("\tFound " + umList.size() + " unique markers in total");
-//        for (UniqueMarker u : umList) {
+        
+        //some UM info
+        int avgLength = 0;
+        int biggest = 0;
+        
+        for (UniqueMarker u : umList) {
 //            System.out.println(u.toString());
-//        }
+            avgLength = avgLength + u.getLength();
+            if (u.getLength() > biggest) {
+                biggest = u.getLength();
+            }
+        }
+        System.out.println("\tAverage length in scope: " + (avgLength / umList.size()));
+        System.out.println("\tLongest UniqueMarker is " + biggest + " bp");
         
 
 //        CGViewTest test = new CGViewTest();
@@ -83,12 +94,12 @@ public class BRIGanalyser {
         
         System.out.println("\n* generating primers");
         String timeStampBegin = new SimpleDateFormat("HH:mm:ss (dd/MM/yyyy)").format(Calendar.getInstance().getTime());
-        System.out.println("\tStarted making primers at: " + timeStampBegin);
+        System.out.println("\t--Started making primers at: " + timeStampBegin + "--");
         
         gp.generate(umList);
         
         String timeStampEnd = new SimpleDateFormat("HH:mm:ss (dd/MM/yyyy)").format(Calendar.getInstance().getTime());
-        System.out.println("\tEnded making primers at: " + timeStampEnd);
+        System.out.println("\t--Ended making primers at: " + timeStampEnd + "--");
         
         
     }//start()

@@ -11,7 +11,6 @@ import ca.ualberta.stothard.cgview.*;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -20,7 +19,7 @@ import org.xml.sax.SAXException;
 public class CGViewTest implements CgviewConstants {
     
     public void test (ArrayList<UniqueMarker> umList){
-        int length = 4809037;
+        int length = 5054053;
 	Cgview cgview = new Cgview(length);
 	
 	//some optional settings
@@ -53,7 +52,7 @@ public class CGViewTest implements CgviewConstants {
         
 	try {
 	    //create a PNG file
-            CgviewIO.writeToPNGFile(cgview, "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\oefendata\\testFile_2.png");
+            CgviewIO.writeToPNGFile(cgview, "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\oefendata\\testFile_3.png");
 	}
         catch (IOException e) {
 	    e.printStackTrace(System.err);

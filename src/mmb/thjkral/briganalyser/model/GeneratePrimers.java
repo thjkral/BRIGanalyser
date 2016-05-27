@@ -19,17 +19,25 @@ public class GeneratePrimers {
     
     int count = 0;
     int countTotal = 0;
+    
+    ArrayList<Primer> forwardList = new ArrayList<>();
+    ArrayList<Primer> reverseList = new ArrayList<>();
 
     public void generate(ArrayList<UniqueMarker> umList) {
-        
-                
+                        
         for (UniqueMarker u : umList) {
             makePrimers(u.getSequenceForward(), PrimerOrientation.FORWARD, u.getNumber());
             makePrimers(u.getSequenceReverse(), PrimerOrientation.REVERSE, u.getNumber());
         }
         
         System.out.println("\tMade " + countTotal + " primers in total");
-        System.out.println("\tSaved " + count + " primers");
+        double percentage = (countTotal / count) * 100;
+        System.out.println("\tSaved " + count + " primers. This is " 
+                + percentage 
+                + "%");
+        
+        MakePairs mp = new MakePairs();
+        mp.pair(forwardList, reverseList);
         
     }//generate()
     
@@ -46,8 +54,8 @@ public class GeneratePrimers {
         /*
         GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
         */
-        int maxProdLength = 150;
-        int minProdLength = 80;
+        int maxProdLength = 70;
+        int minProdLength = 68;
         int maxPrimerLength = 22;
         int minPrimerLength = 18;
         
@@ -82,13 +90,13 @@ public class GeneratePrimers {
         2. For every desired primer length
         3. Voor elke letter/nucleotide in de sequentie
         */
-        breaklabel: for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {  //from min cutoff to max cutoff
+        for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {  //from min cutoff to max cutoff
             for (int j = minPrimerLength; j <= maxPrimerLength; j++) {          //for every desired primer length
                 for (int k = 0; k <= seq.length(); k++) {                       //for every letter
                     int end = k + j;
                     if (end <= i) {
                         String primerSeq = seq.substring(k, end);
-                        
+                        countTotal++;
                         /*
                         If a primer originates from the reverse strand, it must be reversed. It 
                         is far easier in Java when you can start at the beginning of the String
@@ -99,10 +107,7 @@ public class GeneratePrimers {
                         
                         double meltTemp = validate.calculateTm(primerSeq);
                         double gcContent = validate.calculateGc(primerSeq);
-                        
-                        countTotal++;
-//                        System.out.println(countTotal);
-                        
+                                                
                         /*
                         Continue is the primer has the correct melt tempersture
                         and GC content
@@ -112,8 +117,20 @@ public class GeneratePrimers {
                             boolean monoRepeat = validate.checkMonoRepeats(primerSeq);
                             
                             if (monoRepeat && diRepeat) {
-                                count++;
-//                                Primer p = new Primer(number, primerSeq, primerSeq.length(), orientation);
+                                count++;                                
+                                Primer p = new Primer(number, primerSeq, primerSeq.length(), orientation);
+                                
+                                switch (orientation) {
+                                    case FORWARD:
+                                        forwardList.add(p);
+                                        break;
+                                    case REVERSE:
+                                        reverseList.add(p);
+                                        break;
+                                    default:
+                                        throw new AssertionError();
+                                }
+                                
                             }
                             
                         }

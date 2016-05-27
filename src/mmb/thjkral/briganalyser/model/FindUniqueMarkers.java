@@ -144,7 +144,7 @@ public class FindUniqueMarkers {
             If the length is sufficient: isolate the sequence from the reference-
             genome and make a UniqueMarker object.
             */
-            if (difference >= 200 && difference <= 500) {
+            if (difference >= 100) {
                 String markerSequence = parser.getReferenceSequence("", startHighest, stopLowest);
 //                String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGCATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
                 UniqueMarker um = new UniqueMarker(i, 
@@ -155,6 +155,13 @@ public class FindUniqueMarkers {
                         makeComplementary(markerSequence));
                 umList.add(um);
             }
+            
+//            else if (difference >= 24 && difference < 500) {
+//                
+//                
+//                
+//            }
+            
         }
         
         return umList;

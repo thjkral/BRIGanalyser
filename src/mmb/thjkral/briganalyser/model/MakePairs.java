@@ -18,8 +18,12 @@ public class MakePairs {
     
     public void pair (ArrayList<Primer> primerListForward, ArrayList<Primer> primerListReverse) {
         
+        int count = 0;
+        
+        
         for (Primer pf : primerListForward) {
             for (Primer pr : primerListReverse) {
+                
                 
                 double difference = 0;
                 if (pf.getMeltTemp() > pr.getMeltTemp()) {
@@ -29,11 +33,13 @@ public class MakePairs {
                 }
                 
                 if (difference >= 1 && difference <= 6) {
-                    System.out.println("Pairs!");
+                    count++;
                 }
                 
             }
         }
+        
+        System.out.println("\tAble to form " + count + " pairs");
         
         
     }
