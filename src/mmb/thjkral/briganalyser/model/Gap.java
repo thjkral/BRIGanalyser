@@ -54,7 +54,7 @@ public class Gap {
     public String toString() {
         return "Gap{" + "ringName=" + ringName + ", startCor=" + startCor + ", stopCor=" + stopCor + '}';
     }
-
+    //TODO: Remove unnecessary whitespace below
       
     
     

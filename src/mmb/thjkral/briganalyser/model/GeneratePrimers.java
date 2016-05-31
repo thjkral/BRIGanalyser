@@ -26,7 +26,7 @@ public class GeneratePrimers {
     ArrayList<Primer> reverseList = new ArrayList<>();
 
     /**
-     * Overseeing method that executes operations at the rigth time and with the
+     * Overseeing method that executes operations at the right time and with the
      * neccessary parameters.
      * 
      * @param umList    List with UniqueMarker objects
@@ -39,11 +39,13 @@ public class GeneratePrimers {
         }
         
         System.out.println("\tMade " + countTotal + " primers in total");
+        //TODO: Remove commented code
 //        double percentage = (countTotal / count) * 100;
 //        System.out.println("\tSaved " + count + " primers. This is " 
 //                + percentage 
 //                + "%");
-        
+
+        //TODO: Turn into single line comment
         /*
         Make pairs of the newly made primers
         */
@@ -67,6 +69,7 @@ public class GeneratePrimers {
         /*
         GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
         */
+        //TODO: Turn this into an enum (for example PrimersDefaults.MAX_PROD_LENGHT)
         int maxProdLength = 70;
         int minProdLength = 68;
         int maxPrimerLength = 22;
@@ -88,7 +91,8 @@ public class GeneratePrimers {
         */
         int maxAvailableSeq = seq.length() - maxCutOff;
         int minAvailableSeq = seq.length() - minCutOff;
-        
+
+        //TODO: Code should speak for itself here, no need to clarify with a comment.
         /*
         Instance of the class ValidateSequence. This contains methods to check the
         quality of primers.
@@ -99,9 +103,9 @@ public class GeneratePrimers {
         /*
         Order of traversion:
         1. from the minimal to the maximal nucleotides that must be preserved
-           (see maxCutoff for example
+           (see maxCutoff for example)
         2. For every desired primer length
-        3. Voor elke letter/nucleotide in de sequentie
+        3. For every letter/nucleotide in the sequence
         */
         for (int i = maxAvailableSeq; i <= minAvailableSeq; i++) {  //from min cutoff to max cutoff
             for (int j = minPrimerLength; j <= maxPrimerLength; j++) {          //for every desired primer length
@@ -125,6 +129,7 @@ public class GeneratePrimers {
                         Continue is the primer has the correct melt tempersture
                         and GC content
                         */
+                        //TODO: Turn these values into enums, makes your code more readable and easier to change.
                         if (meltTemp >= 58.0 && meltTemp <= 60.0 && gcContent >= 30.0 && gcContent <= 80.0) {
                             boolean diRepeat = validate.checkDiRepeats(primerSeq);
                             boolean monoRepeat = validate.checkMonoRepeats(primerSeq);
@@ -143,12 +148,8 @@ public class GeneratePrimers {
                                     default:
                                         throw new AssertionError();
                                 }
-                                
                             }
-                            
                         }
-                        
-                        
                     }
                 }
             }
@@ -167,8 +168,4 @@ public class GeneratePrimers {
     private void makeSmallPrimers(String seq, PrimerOrientation orientation, int number) {
         
     }
-    
-    
-    
- 
 }//class()

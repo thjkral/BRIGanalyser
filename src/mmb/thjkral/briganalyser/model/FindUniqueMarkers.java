@@ -17,10 +17,11 @@ import java.util.ArrayList;
  * @author KralTHJ
  */
 public class FindUniqueMarkers {
-    
+    //TODO: Make this comment single line
     /*
     GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
     */
+    //TODO: Turn this into an enum (for example UniqueMarkersDefaults.DEAFULT_TOTAL_LENGTH, UniqueMarkersDefaults.DEFAULT_NUM_RINGS)
     int totalLength = 5357923;
     int numRings = 2;
     
@@ -65,13 +66,20 @@ public class FindUniqueMarkers {
             Gap gapOne = (Gap) ringList.get(0).getGapsArray().get(i);
             int start = gapOne.getStartCor();
             int stop = gapOne.getStopCor();
-            
+
+
+            //TODO: Remove this.
             /*
             
             */
             ArrayList<Gap> matches = new ArrayList<>();
             matches.add(gapOne);
-            
+
+
+            //TODO: Tip: if you have to describe what you are doing in the comments, your code isn't written clear enough.
+            // Try to use variable names that describe the object and only use comments to describe WHY you are doing
+            // something, not HOW. Another programmer should be able to distill what is going on by reading the code,
+            // not the comments.
             for (int j = 1; j < ringList.size(); j++) {//for every other Ring
                 
                 for (int k = 0; k < ringList.get(j).getGapsArray().size(); k++) {//for every Gap of that Ring
@@ -91,6 +99,7 @@ public class FindUniqueMarkers {
             }
             
         }
+        //TODO: Remove commented code.
 //        System.out.println("There are " + overlappingGaps.size() + " overlapping gaps");
         return overlappingGaps;
         
@@ -107,7 +116,9 @@ public class FindUniqueMarkers {
         ArrayList<UniqueMarker> umList = new ArrayList<>();
         
         ReadFile parser = new ReadFile();
-        
+
+
+        //TODO: Describe why, not how. (see comment above)
         /*
         Determine the start and stop position of the UniqueMarker on the reference
         genome. From the overlapping gaps, this is the highest start position
@@ -147,6 +158,7 @@ public class FindUniqueMarkers {
             */
             if (difference >= 100) {
                 String markerSequence = parser.getFromReferenceSequence("", startHighest, stopLowest);
+                //TODO: Remove commented code
 //                String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGCATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
                 UniqueMarker um = new UniqueMarker(i, 
                         startHighest, 
@@ -156,7 +168,7 @@ public class FindUniqueMarkers {
                         makeComplementary(markerSequence));
                 umList.add(um);
             }
-            
+            //TODO: Remove commented code
 //            else if (difference >= 24 && difference < 500) {
 //                
 //                
@@ -178,12 +190,13 @@ public class FindUniqueMarkers {
      * @return String   Sequence complementary to input
      */
     private String makeComplementary (String sequence) {
-        
+        //TODO: Make this into single line comment
         /*
         Reverse the sequence
         */
         String seqComp = new StringBuilder(sequence).reverse().toString();
-        
+
+        //TODO: No shit, sherlock.
         /*
         With StringBuilder(), a new String is made.
         */

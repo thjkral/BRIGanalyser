@@ -30,7 +30,7 @@ public class ValidateSequence {
      * @return double   The melting temperature of the primer/probe
      */
     public double calculateTm (String seq) {
-               
+        //TODO: Unnecesarry comment.
         /*
         Count all nucleotides
         */

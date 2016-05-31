@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author KralTHJ
  */
 public class CGViewTest implements CgviewConstants {
-    
+    //TODO: I assume this is a feature test. If so, move into a seperate package/directory/namespace to seperate concerns.
     public void test (ArrayList<UniqueMarker> umList){
         int length = 5054053;
 	Cgview cgview = new Cgview(length);

@@ -85,7 +85,7 @@ public class ReadFile {
      * @return String       Sequence of the UniqueMarker
      */
     public String getFromReferenceSequence(String fileLocation, int start, int stop) {
-        
+        //TODO: You are giving fileLocation as argument but you aren't using it. Make this into a (fileLocation = fileLocation || DefaultEnum.FILE_LOCATION)
         fileLocation = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\real_data\\dataSigrid\\genome_1_16090044731-01.fna";
         String referenceGenomeSub = "";
         int passedLetters = 0;
@@ -107,21 +107,25 @@ public class ReadFile {
                 } else {//if line doesn't start with description
                     passedLetters = passedLetters + line.length();
                 }
-                
+
+                //TODO: Unnecesarry comment.
                 /*
                 Start of by determining if the current line is within range
                 */
-                if (start < passedLetters) {                    
+                if (start < passedLetters) {
+                    //TODO: Unnecesarry comment.
                     /*
                     adjust the indices for proper substrings
                     */                    
                     int startIndex = start - (passedLetters - line.length());
                     int stopIndex = stop - (passedLetters - line.length());
 
+                    //TODO: Unnecesarry comment.
                     /*
                     Determine if this is the first line encountered within range
                     */
                     if (referenceGenomeSub.isEmpty()) {
+                        //TODO: Unnecesarry comment.
                         /*
                         Determine if the stop position is on the current line also
                         */
@@ -134,6 +138,7 @@ public class ReadFile {
                         }
 
                     } else {
+                        //TODO: Unnecesarry comment.
                         /*
                         Determine if the stop positions is on the current line
                         */
@@ -144,19 +149,16 @@ public class ReadFile {
                         } else {
                             referenceGenomeSub = referenceGenomeSub.concat(line);
                         }
-                            
                     }
-                            
                 }
-                
             }
             br.close();
-            
         } catch (IOException e) {
             System.out.println("Error while reading reference genome: " 
                     + e.getMessage());
         }
-        
+
+        //TODO: Unnecesarry comment.
         /*
         Remove all white space and all characters to upper case before returning
         */
@@ -164,8 +166,5 @@ public class ReadFile {
         referenceGenomeSub = referenceGenomeSub.toUpperCase();
         
         return referenceGenomeSub;
-        
     }//getReferenceSequence()
-    
-    
 }//class()

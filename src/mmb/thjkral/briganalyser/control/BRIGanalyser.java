@@ -29,11 +29,11 @@ public class BRIGanalyser {
     public static void main(String[] args) {
         
         BRIGanalyser ba = new BRIGanalyser();
-        
-//        String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\ProefdataBRIG\\exampleData\\output_12\\scratch\\BRIGExample.fna.xml";
+        //TODO: Make the filePath an argument given to this method, use the filePath below as default if it is undefined, like so:
+        // String filePath = args[index] || Defaults.FILE_PATH
         String filePath = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\outputBRIG\\dataSigrid\\output_1\\scratch\\genome_1_16090044731-01.fna.xml";
         ba.start(filePath);
-    }//main()
+    }//main() // TODO: Remove these after methods, unnecessary bloat
 
     /**
      * -
@@ -41,13 +41,20 @@ public class BRIGanalyser {
      */
     private void start(String filePath) {
         
-        
+        //TODO: Make this into single line comment
         /*
         Make Document object from XML file
         */
         ReadFile parser = new ReadFile();
+        //TODO: Tip, turn all the System.out.println statements into a Logger class which automatically formats the text.
+        // this will make your code easier to read and improves consitency of the log output. For example, if you make
+        // a logger which automagically adds a timestamp before the message you will get nicely formatted/useful information
+        // like so:
+        // [31-05-2016, 14:23, BRIGanalyser] reading file
         System.out.println("* reading file");
         Document doc = parser.makeDocument(filePath);
+
+        //TODO: Make this into single line comment
         /*
         Isolate gaps from the doc
         */
@@ -60,7 +67,8 @@ public class BRIGanalyser {
         for (Ring r : ringList) {
             System.out.println("\tRing " + r.getName() + ": " + r.getGapsArray().size());
         }
-        
+
+        //TODO: Make this into single line comment
         /*
         Find the unique markers
         */
@@ -74,7 +82,7 @@ public class BRIGanalyser {
         int biggest = 0;
         
         for (UniqueMarker u : umList) {
-//            System.out.println(u.toString());
+//            System.out.println(u.toString()); // TODO: Remove commented code.
             avgLength = avgLength + u.getLength();
             if (u.getLength() > biggest) {
                 biggest = u.getLength();
@@ -82,11 +90,13 @@ public class BRIGanalyser {
         }
         System.out.println("\tAverage length in scope: " + (avgLength / umList.size()));
         System.out.println("\tLongest UniqueMarker is " + biggest + " bp");
-        
 
+
+        // TODO: Remove commented code.
 //        CGViewTest test = new CGViewTest();
 //        test.test(umList); 
-        
+
+        //TODO: Make this into single line comment
         /*
         Isolate primers
         */

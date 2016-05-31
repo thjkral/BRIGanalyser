@@ -31,7 +31,11 @@ public class IsolateGaps {
      * @return ArrayList    Ring objects, each containing a ArrayList with gaps
      */
     public ArrayList<Ring> isolate (Document doc) {
-        
+
+        //TODO: Unnecessary comment, you are describing the exact thing that your code is doing. Try to avoid
+        // comments like this:
+        // // Reverse the string
+        // String newString = oldString.reverse()
         /*
         Steps:
         1. generateRings
@@ -50,19 +54,23 @@ public class IsolateGaps {
      * @return ArrayList<Ring>
      */
     private ArrayList<Ring> makeRings(Document doc) {
-        
+
+        //TODO: Unnecessary comment (see comment above)
         /*
         Document to Element
         */
         Element el = doc.getDocumentElement();
-        
+
+        //TODO: Unnecessary comment (see comment above)
         /*
         All featureSlot elements (rings) in list
         */
         NodeList nList = el.getElementsByTagName("featureSlot");
+        //TODO: Remove commented code
 //        System.out.println("Number of rings: " + nList.getLength());
 
 
+        //TODO: Unnecessary comment (see comment above)
         /*
         ArrayList for holding Ring objects
         */
@@ -70,27 +78,33 @@ public class IsolateGaps {
         
         for (int i = 0; i < nList.getLength(); i++) {
             Element ringTag = (Element) nList.item(i);
+            //TODO: Unnecessary comment (see comment above)
             //fetch all featureRange nodes
             NodeList startStopCor = ringTag.getElementsByTagName("featureRange");
-            
+
+            //TODO: Unnecessary comment (see comment above)
             //make ArrayLists for coordinates
             ArrayList startCor = new ArrayList();
             ArrayList stopCor = new ArrayList();
             
             for (int j = 0; j < startStopCor.getLength(); j++) {//traverse all featureRange nodes
                 Element features = (Element) startStopCor.item(j);
+                //TODO: Unnecessary comment (see comment above)
                 /*
                 Get start- and stop positions
                 */
                 startCor.add(Integer.parseInt(features.getAttribute("start")));
                 stopCor.add(Integer.parseInt(features.getAttribute("stop")));
             }
-            
+
+            //TODO: Unnecessary comment (see comment above)
             /*
             Sort coordinates
             */
             Collections.sort(startCor);
             Collections.sort(stopCor);
+
+            //TODO: Unnecessary comment (see comment above)
             /*
             Create Ring objects and add all to ArrayList
             */
