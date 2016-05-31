@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import mmb.thjkral.briganalyser.enums.PrimerOrientation;
 
 /**
- *
+ * This Class is for the making of Primer objects.
+ * Primers are based on the sequence of the UniqueMarker.
+ * 
  * @author KralTHJ
  */
 public class GeneratePrimers {
@@ -23,11 +25,17 @@ public class GeneratePrimers {
     ArrayList<Primer> forwardList = new ArrayList<>();
     ArrayList<Primer> reverseList = new ArrayList<>();
 
+    /**
+     * Overseeing method that executes operations at the rigth time and with the
+     * neccessary parameters.
+     * 
+     * @param umList    List with UniqueMarker objects
+     */
     public void generate(ArrayList<UniqueMarker> umList) {
                         
         for (UniqueMarker u : umList) {
-            makePrimers(u.getSequenceForward(), PrimerOrientation.FORWARD, u.getNumber());
-            makePrimers(u.getSequenceReverse(), PrimerOrientation.REVERSE, u.getNumber());
+            makeBigPrimers(u.getSequenceForward(), PrimerOrientation.FORWARD, u.getNumber());
+            makeBigPrimers(u.getSequenceReverse(), PrimerOrientation.REVERSE, u.getNumber());
         }
         
         System.out.println("\tMade " + countTotal + " primers in total");
@@ -36,6 +44,9 @@ public class GeneratePrimers {
 //                + percentage 
 //                + "%");
         
+        /*
+        Make pairs of the newly made primers
+        */
         MakePairs mp = new MakePairs();
         mp.pair(forwardList, reverseList);
         
@@ -43,14 +54,16 @@ public class GeneratePrimers {
     
     
     /**
-     * Makes primers from any given sequence provided with the number of the
-     * coresponding UniqueMarker and the orientation of the strand
+     * Makes primers from any given sequence when the sequence is big enough.
+     * When an UniqueMarker is big enough, primer pairs and the product will fit
+     * inside the unique marker. This method will makes primers for that sequence
+     * only.
      * 
-     * @param seq
-     * @param orientation
-     * @param number 
+     * @param seq           Sequence of the current UniqueMarker
+     * @param orientation   Enum to distiguise between foreard and reverse primers
+     * @param number        Number of the coresponding UniqueMarker
      */
-    private void makePrimers (String seq, PrimerOrientation orientation, int number) {
+    private void makeBigPrimers (String seq, PrimerOrientation orientation, int number) {
         /*
         GLOBAL VALUES. PLEASE DELETE WHEN MORE FUNCTIONALITY IS PRESENT!
         */
@@ -77,10 +90,10 @@ public class GeneratePrimers {
         int minAvailableSeq = seq.length() - minCutOff;
         
         /*
-        Instance of the class ValidatePrimers. This contains methods to check the
+        Instance of the class ValidateSequence. This contains methods to check the
         quality of primers.
         */
-        ValidatePrimers validate = new ValidatePrimers();
+        ValidateSequence validate = new ValidateSequence();
         
         
         /*
@@ -118,7 +131,7 @@ public class GeneratePrimers {
                             
                             if (monoRepeat && diRepeat) {
                                 count++;                                
-                                Primer p = new Primer(number, primerSeq, primerSeq.length(), orientation);
+                                Primer p = new Primer(number, primerSeq, primerSeq.length(), orientation, meltTemp, gcContent);
                                 
                                 switch (orientation) {
                                     case FORWARD:
@@ -141,6 +154,21 @@ public class GeneratePrimers {
             }
         }
         
-    }//makePrimers()
+    }//makeBigPrimers()
+    
+    
+    /**
+     * UNDER CONSTRUCTION.
+     * 
+     * @param seq
+     * @param orientation
+     * @param number 
+     */
+    private void makeSmallPrimers(String seq, PrimerOrientation orientation, int number) {
+        
+    }
+    
+    
+    
  
 }//class()
