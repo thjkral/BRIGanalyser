@@ -16,11 +16,18 @@ import java.util.ArrayList;
  */
 public class Ring {
     
-    private String name;    
-    private ArrayList gapsArray;
-    public ArrayList startPositions;
-    public ArrayList stopPositions;
+    private String name;                //Name of the Ring
+    private ArrayList gapsArray;        //ArrayList with a the gaps on the Ring
+    public ArrayList startPositions;    //ArrayList of start positions in a Ring
+    public ArrayList stopPositions;     //ArrayList of stop positions in a Ring
 
+    /**
+     * Constructor for Ring object.
+     * 
+     * @param name              Name of the Ring
+     * @param startPositions    ArrayList of start positions in a Ring
+     * @param stopPositions     ArrayList of stop positions in a Ring
+     */
     public Ring(String name, ArrayList startPositions, ArrayList stopPositions) {
         this.name = name;
         this.startPositions = startPositions;

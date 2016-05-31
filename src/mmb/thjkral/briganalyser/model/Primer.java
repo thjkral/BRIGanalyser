@@ -11,27 +11,43 @@ package mmb.thjkral.briganalyser.model;
 import mmb.thjkral.briganalyser.enums.PrimerOrientation;
 
 /**
- *
+ * Primer object.
+ * 
+ * 
  * @author KralTHJ
  */
 public class Primer{
     
-    int markerNumber;
-    private String sequence;
-    private int length;
-    private PrimerOrientation orientation;
-    private double meltTemp;
-    private double gcContent;
-    private boolean isUnique = false;
+    int markerNumber;                       //The number of the associated UM
+    private String sequence;                //The sequence of the primer
+    private int length;                     //Number of nucleotides in the Primer
+    private int startPos;                   
+    private int stopPos;
+    private PrimerOrientation orientation;  //Enum to distinguish between forward of reverse
+    private double meltTemp;                //Melting temperature of the Primer
+    private double gcContent;               //The GC content of the Primer
+    private boolean isUnique = false;       //Defines wheter a primer is unique
 
-    public Primer(int markerNumber, String sequence, int length, PrimerOrientation orientation) {
+    /**
+     * Constructor of the Primer class.
+     * 
+     * @param markerNumber  The number of the associated UM
+     * @param sequence      The sequence of the primer
+     * @param length        Number of nucleotides in the Primer
+     * @param orientation   Enum to distinguish between forward of reverse
+     * @param meltTemp      Melting temperature of the Primer
+     * @param gcContent     Defines wheter a primer is unique
+     */
+    public Primer(int markerNumber, String sequence, int length, PrimerOrientation orientation, double meltTemp, double gcContent) {
         this.markerNumber = markerNumber;
         this.sequence = sequence;
         this.length = length;
         this.orientation = orientation;
+        this.meltTemp = meltTemp;
+        this.gcContent = gcContent;
     }
 
-    
+       
     public String getSequence() {
         return sequence;
     }
@@ -46,6 +62,23 @@ public class Primer{
         return length;
     }
 
+    public int getStartPos() {
+        return startPos;
+    }
+
+    public void setStartPos(int startPos) {
+        this.startPos = startPos;
+    }
+
+    public int getStopPos() {
+        return stopPos;
+    }
+
+    public void setStopPos(int stopPos) {
+        this.stopPos = stopPos;
+    }
+    
+    
     public void setLength(int length) {
         this.length = length;
     }

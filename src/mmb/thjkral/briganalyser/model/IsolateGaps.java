@@ -27,8 +27,8 @@ public class IsolateGaps {
     /**
      * Controls the continuity of the Class.
      * 
-     * @param doc Document type made by the Documentbuilder package
-     * @return ArrayList with Ring objects, each containing a ArrayList with gaps
+     * @param doc           Document type made by the Documentbuilder package
+     * @return ArrayList    Ring objects, each containing a ArrayList with gaps
      */
     public ArrayList<Ring> isolate (Document doc) {
         
@@ -104,6 +104,9 @@ public class IsolateGaps {
 
     /**
      * Isolates gaps based on the Rings.
+     * Basicly, this method reverses the start- and stop positions. The start in
+     * a Ring becomes a stop for a Gap and so on.
+     * 
      * @param ringList
      * @return ArrayList<Gap> gapList
      */

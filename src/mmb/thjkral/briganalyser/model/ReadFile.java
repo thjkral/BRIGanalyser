@@ -24,16 +24,21 @@ import org.xml.sax.SAXException;
 
 /**
  * Contains methods for reading different files.
- * Can read XML files and returns the Document object. 
+ * The application requires different kinds of input. This Class gathers methods
+ * to read these files. 
+ * 
  * @author KralTHJ
  */
 public class ReadFile {
 
     /**
-     * Makes a Document object of a input XML file.
+     * Makes a Document object of a input XML file and returns this.
+     * The output of BRIG (used as input here) consists of an XML file. These
+     * contain information about the Rings. Files like these adhere to the CGView
+     * XML lay-out since it's made by a Java package with the same name.
      * 
-     * @param filePath
-     * @return Document doc
+     * @param filePath      Location of the XML file
+     * @return Document     Document object of the XML file
      */
     public Document makeDocument(String filePath) {
         
@@ -67,13 +72,19 @@ public class ReadFile {
     }//makeDocument()
     
     /**
-     *
-     * @param fileLocation
-     * @param start
-     * @param stop
-     * @return String
+     * Extracts a part of a given reference sequence.
+     * Reads a file containing the reference genome and returns a subsequence
+     * between a given start- and stopposition. Reading an entire file and 
+     * possibly saving it as variable is not an option due to computer memory.
+     * This is why the methods only saves the part from the sequence that is 
+     * needed. After the last nucleotide is reached, the method terminates.
+     * 
+     * @param fileLocation  Location of the input file
+     * @param start         Begin of the subsequence
+     * @param stop          End of the subsequence
+     * @return String       Sequence of the UniqueMarker
      */
-    public String getReferenceSequence(String fileLocation, int start, int stop) {
+    public String getFromReferenceSequence(String fileLocation, int start, int stop) {
         
         fileLocation = "\\\\zkh\\dfs\\Gebruikers12\\KralTHJ\\Data\\Workspace\\real_data\\dataSigrid\\genome_1_16090044731-01.fna";
         String referenceGenomeSub = "";
@@ -146,6 +157,9 @@ public class ReadFile {
                     + e.getMessage());
         }
         
+        /*
+        Remove all white space and all characters to upper case before returning
+        */
         referenceGenomeSub = referenceGenomeSub.replaceAll("\\s+","");
         referenceGenomeSub = referenceGenomeSub.toUpperCase();
         

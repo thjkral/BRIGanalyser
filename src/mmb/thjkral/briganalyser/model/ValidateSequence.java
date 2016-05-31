@@ -13,18 +13,21 @@ import java.util.regex.Pattern;
 
 /**
  * Class with methods that help determine the quality of primers.
+ * Not every primer or probe made by the GeneratePrimers can be used in qPCR 
+ * reactions. By checking with the methods in this Class, bad primers can be 
+ * separated from the bad.
  * 
  * @author KralTHJ
  */
-public class ValidatePrimers {
+public class ValidateSequence {
     
     /**
-     * Calculates the melting temperature of a primer.
+     * Calculates the melting temperature of a primer/probe.
      * The melting temperature, or Tm, is the temperature when 50% of the DNA
      * is melted of its counterpart
      * 
-     * @param seq
-     * @return double
+     * @param seq       Sequence to be validated
+     * @return double   The melting temperature of the primer/probe
      */
     public double calculateTm (String seq) {
                
@@ -53,8 +56,8 @@ public class ValidatePrimers {
      * Calculates the percentage of Guanine and Cytosine nucleotides in the DNA
      * sequence.
      * 
-     * @param seq
-     * @return double
+     * @param seq       Sequence to be validated
+     * @return double   GC content of the primer/probe
      */
     public double calculateGc (String seq) {
         
@@ -81,16 +84,16 @@ public class ValidatePrimers {
     }//calculateGc()
     
     /**
-     * If the sequence has to many repeating groups of two nucleotides, the primer
-     * is not eligable for usage.
+     * If the sequence has to many repeating groups of two nucleotides, the 
+     * primer/probe is not eligable for usage.
+     * True = valid | False = invalid
      * 
-     * @param seq
-     * @return boolean
+     * @param seq       Sequence to be validated
+     * @return boolean  Boolean whether Di-repeats are present
      */
     public boolean checkDiRepeats (String seq) {
         
         /*
-        Make booelan. True for no direpeats, false for direpeats in sequence.
         Default is true.
         */
         boolean useable = true;        
@@ -114,11 +117,12 @@ public class ValidatePrimers {
     }//checkDiRepeats()
     
     /**
-     * If the sequence has to many repeating nucleotides the primer is not 
+     * If the sequence has to many repeating nucleotides the primer/probe is not 
      * usefull.
+     * True = valid | False = invalid
      * 
-     * @param seq
-     * @return boolean
+     * @param seq       Sequence to be validated
+     * @return boolean  Whether a primer contains single nucleotide repeats
      */
     public boolean checkMonoRepeats (String seq) {
         
@@ -149,9 +153,10 @@ public class ValidatePrimers {
     /**
      * The last five nucleotides must contain no more than 2 guanine and cytosine
      * in the last five nucleotides.
+     * True = valid | False = invalid. FOR PRIMERS ONLY
      * 
-     * @param seq
-     * @return boolean
+     * @param seq       Sequence to be validated
+     * @return boolean  Whether the last five nucleotides contain 2 G/C or not
      */
     public boolean threeEnd (String seq) {
         
@@ -173,7 +178,7 @@ public class ValidatePrimers {
         int nucG = subSeq.length() - subSeq.replace("G", "").length();
         
         /*
-        Change boolean is there are more than 2 G's or C's
+        Change boolean if there are more than 2 G's or C's
         */
         if (nucC > 2 || nucG > 2) {
             isUsable = false;
@@ -182,7 +187,14 @@ public class ValidatePrimers {
         return isUsable;
     }//threeEnd()
     
-
+    /**
+     * A Guanine at the end of a probe is not allowed.
+     * This has a quenching effect of the probe.
+     * True = valid | False = invalid
+     * 
+     * @param seq       Sequence to be validated
+     * @return boolean  Whether a probe has a Guanine at the 3' end or not
+     */
     public boolean checkThreeTerminal (String seq) {
         
         if (seq.charAt(seq.length() - 1) == 'G' ) {
@@ -193,7 +205,15 @@ public class ValidatePrimers {
         
     }//checkThreeTerminal()
     
-    
+    /**
+     * Evaluates whether a primer or probe can form a 'hairpin' structure.
+     * When both ends of a sequence are complementary, there is a possibility
+     * that those will anneal. This will render the primer or probe useless.
+     * True = valid | False = invalid. FOR PROBES ONLY
+     * 
+     * @param seq       Sequence to be validated
+     * @return boolean  Whether a hairpin can be formed
+     */
     public boolean checkHairpin (String seq) {
         
         

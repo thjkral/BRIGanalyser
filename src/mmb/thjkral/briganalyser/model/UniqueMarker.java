@@ -9,18 +9,31 @@
 package mmb.thjkral.briganalyser.model;
 
 /**
- *
+ * UniqueMarker object.
+ * This is a region on the reference genome where the genomes of the other species
+ * don't match. 
+ * 
  * @author KralTHJ
  */
 public class UniqueMarker {
     
-    private int number;
-    private int startPosition;
-    private int stopPosition;
-    private int length;
-    private String sequenceForward;
-    private String sequenceReverse;
+    private int number;             //Number of the UniqueMarker
+    private int startPosition;      //Start position on the reference genome
+    private int stopPosition;       //Stop position on the reference genome
+    private int length;             //Number of nucleotides in the UniqueMarker
+    private String sequenceForward; //The sequence of the forward strand
+    private String sequenceReverse; //The sequence of the reverse strand
 
+    /**
+     * Constructor of the UniqueMarker Class.
+     * 
+     * @param number            Number of the UniqueMarker
+     * @param startPosition     Start position on the reference genome
+     * @param stopPosition      Stop position on the reference genome
+     * @param length            Number of nucleotides in the UniqueMarker
+     * @param sequenceForward   The sequence of the forward strand
+     * @param sequenceReverse   The sequence of the reverse strand
+     */
     public UniqueMarker(int number, int startPosition, int stopPosition, int length, String sequenceForward, String sequenceReverse) {
         this.number = number;
         this.startPosition = startPosition;

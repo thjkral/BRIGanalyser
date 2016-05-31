@@ -9,7 +9,9 @@
 package mmb.thjkral.briganalyser.model;
 
 /**
- *
+ * The rings in BRIG output are almost never continuous, the space in between is
+ * defined as a Gap object.
+ * 
  * @author KralTHJ
  */
 public class Gap {
@@ -18,6 +20,13 @@ public class Gap {
     private int startCor;
     private int stopCor;
 
+    /**
+     * Constructor for Gap object.
+     * 
+     * @param ringName  Name of the Ring it belongs to
+     * @param startCor  Start position in Ring
+     * @param stopCor   Stop position in Ring
+     */
     public Gap(String ringName, int startCor, int stopCor) {
         this.ringName = ringName;
         this.startCor = startCor;

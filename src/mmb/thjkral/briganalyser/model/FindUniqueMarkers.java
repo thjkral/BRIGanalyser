@@ -97,7 +97,8 @@ public class FindUniqueMarkers {
     }//compare()
     
     /**
-     * Takes 
+     * Makes UniqueMarker objects from a list of gaps.
+     * 
      * @param overlappingGaps
      * @return 
      */
@@ -145,7 +146,7 @@ public class FindUniqueMarkers {
             genome and make a UniqueMarker object.
             */
             if (difference >= 100) {
-                String markerSequence = parser.getReferenceSequence("", startHighest, stopLowest);
+                String markerSequence = parser.getFromReferenceSequence("", startHighest, stopLowest);
 //                String tempSequence = "ATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGCATACAGATATAGACAAGCGCGCGCCCGCTAGAGAGCACGTCGCGCGAGCGTGTTTGCGCGCGAAAAGCGCGCTGAGATTCGCGC";
                 UniqueMarker um = new UniqueMarker(i, 
                         startHighest, 
@@ -172,10 +173,9 @@ public class FindUniqueMarkers {
     
     /**
      * Returns the complement of a given DNA sequence.
-     * The sequence is not reversed however. When working with Strings in Java,
-     * it is easier if I can start at the beginning (AKA the '3)
-     * @param sequence
-     * @return complementary sequence
+     * 
+     * @param sequence  DNA sequence
+     * @return String   Sequence complementary to input
      */
     private String makeComplementary (String sequence) {
         
