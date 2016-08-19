@@ -1,18 +1,13 @@
 /*
  * This code is created by:
  * Tom Kral | Bioinformatics intern
- * t.h.j.kral@umcg.nl | +31642935544
- * 
- * Commissioned by:
- * University Medical Center Groningen | Medical Microbiology
+ * contact@tomkral.nl | +31642935544 | tomkral.nl
  */
 package mmb.thjkral.briganalyser.control;
 
-import org.apache.commons.cli.*;
-
 /**
- * Parses the commandline.
- * @author KralTHJ
+ *
+ * @author tom
  */
 public class CLI {
     
